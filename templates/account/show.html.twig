@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+    {{ show }}
+
+    <br>
+
+    {{ account.email }}
+    <br>
+
+    {{ account.name }}
+    <br>
+
+    {{ account.nickname }}
+
+    <br>
+
+    {{ account.libraries|length }}
+
+{% endblock %}
+
