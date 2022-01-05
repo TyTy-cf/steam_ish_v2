@@ -1,0 +1,18 @@
+
+{% for comment in comments %}
+    <div class="card {{ classCss }} my-2 comment-card">
+        <div class="card-header">
+            <a href="{{ path('game_show', {'id': comment.game.id}) }}">
+                {{ comment.game.name }}
+            </a>
+        </div>
+        <div class="card-body">
+            {{ comment.content|slice(0, 50) }}...
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('account_show', {'name': comment.account.name}) }}">
+                {{ 'home.menu.comment.writted_by'|trans({'%account%': comment.account.name, '%date%': comment.createdAt|date('d/m/Y')}) }}
+            </a>
+        </div>
+    </div>
+{% endfor %}

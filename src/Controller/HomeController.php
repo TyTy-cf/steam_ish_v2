@@ -13,6 +13,9 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/", name="home")
+     * @param GameRepository $gameRepository
+     * @param CommentRepository $commentRepository
+     * @return Response
      */
     public function index(
         GameRepository $gameRepository,
@@ -22,8 +25,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'alphaGames' => $gameRepository->findLastGames(10, true),
             'lastPublishedGames' => $gameRepository->findLastGames(4),
-            'lastComments' => $commentRepository->findCommentsByLimit(5),
-            'mostPlayedGames' => $gameRepository->findMostPlayedGame(10),
+            'lastComments' => $commentRepository->findCommentsByLimit(3),
+            'mostPlayedGames' => $gameRepository->findMostPlayedGame(5),
         ]);
     }
 

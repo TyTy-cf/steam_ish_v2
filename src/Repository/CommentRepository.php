@@ -29,6 +29,7 @@ class CommentRepository extends ServiceEntityRepository
             ->select('comment', 'game', 'account')
             ->join('comment.account', 'account')
             ->join('comment.game', 'game')
+            ->orderBy('comment.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()

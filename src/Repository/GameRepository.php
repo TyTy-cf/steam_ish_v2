@@ -71,6 +71,7 @@ class GameRepository extends ServiceEntityRepository
             ->join(Library::class, 'library', Join::WITH, 'library.game = game')
             ->groupBy('game.name')
             ->orderBy( 'SUM(library.gameTime)', 'DESC')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;

@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container my-1">
-        <h3>{{ 'home.menu.most_games'|trans }}</h3>
+        <h2 class="my-1">{{ 'home.menu.most_games'|trans }}</h2>
         <div class="row">
             {% include 'common/partial/game_loop.html.twig' with {
                     'games': alphaGames,
@@ -14,11 +14,29 @@
             %}
         </div>
 
-        <h3>{{ 'home.menu.recent_games'|trans }}</h3>
+        <h2 class="my-1">{{ 'home.menu.recent_games'|trans }}</h2>
         <div class="row">
             {% include 'common/partial/game_loop.html.twig' with {
                 'games': lastPublishedGames,
                 'classCss': 'col-3'
+            }
+            %}
+        </div>
+
+        <h2 class="my-1">{{ 'home.menu.last_comments'|trans }}</h2>
+        <div class="row">
+            {% include 'common/partial/comment_loop.html.twig' with {
+                'comments': lastComments,
+                'classCss': 'col-4'
+            }
+            %}
+        </div>
+
+        <h2 class="my-1">{{ 'home.menu.most_played'|trans }}</h2>
+        <div class="row">
+            {% include 'common/partial/game_loop.html.twig' with {
+                'games': mostPlayedGames,
+                'classCss': 'col-20'
             }
             %}
         </div>

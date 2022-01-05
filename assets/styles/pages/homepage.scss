@@ -5,5 +5,84 @@
 }
 
 .card-game {
+  position: relative;
+
+  .container-price {
+    position: absolute;
+    width: 100%;
+    height: 80px;
+    box-shadow: inset 0 -60px 30px -30px rgb(0 0 0 / 40%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    .price {
+      padding: 0.3em 0.5em;
+      border-radius: 0.3em;
+      background-color: $default-orange;
+      color: $default-white;
+      bottom: 100%;
+      right: 0.2em;
+      position: relative;
+      font-size: 19px;
+      font-weight: 700;
+      text-shadow: 0 0 4px #000;
+      margin-left: auto;
+    }
+  }
+
+  .card-bottom {
+    height: 5em;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background-color: $background-lighter;
+    padding-left: 0.2em;
+    padding-right: 0.1em;
+    padding-bottom: 0.2em;
+
+    span {
+      text-decoration: none !important;
+      font-size: 1.2em;
+      font-weight: 600;
+      color: $background-title;
+    }
+  }
+
+  &:hover {
+    text-decoration: none !important;
+    transform: scale(1.05);
+  }
+}
+
+.container-image {
   height: 360px;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.comment-card {
+  color: $background-title;
+  height: 160px;
+
+  .card-header {
+    a {
+      color: $background-title;
+      text-decoration: none;
+      &:hover {
+        color: $default-orange;
+      }
+    }
+  }
+  .card-footer {
+    a {
+      color: $background-title;
+      text-decoration: none;
+      &:hover {
+        color: $default-orange;
+      }
+    }
+  }
 }
