@@ -20,10 +20,10 @@ class HomeController extends AbstractController
     ): Response
     {
         return $this->render('home/index.html.twig', [
-            'alphaGame' => $gameRepository->findLastGames(10, true),
+            'alphaGames' => $gameRepository->findLastGames(10, true),
             'lastPublishedGames' => $gameRepository->findLastGames(4),
             'lastComments' => $commentRepository->findCommentsByLimit(5),
-            'mostPlayedGame' => $gameRepository->findMostPlayedGame(10),
+            'mostPlayedGames' => $gameRepository->findMostPlayedGame(10),
         ]);
     }
 

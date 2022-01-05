@@ -14,5 +14,7 @@ home:
   menu:
     accounts: 'Les comptes'
     games: 'Les jeux'
+    most_games: 'Tous les jeux'
+    recent_games: 'Les dernières sorties'
   search:
     placeholder: 'Jeux...'
