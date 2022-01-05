@@ -1,0 +1,32 @@
+
+[data-games-search] {
+  width: 420px;
+}
+
+.autocomplete {
+  background: white;
+  z-index: 1000;
+  font-size: 18px;
+}
+
+.autocomplete * {
+  font: inherit;
+}
+
+.autocomplete > div {
+  padding: 0 4px;
+}
+
+.autocomplete .form-control {
+  background: white;
+}
+
+.autocomplete-item {
+  &:hover,
+  > div.selected {
+    background: $background-title;
+    color: $background-lighter;
+    cursor: pointer;
+  }
+}
+

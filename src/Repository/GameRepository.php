@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Game;
+use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +20,22 @@ class GameRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Game::class);
+    }
+
+    /**
+     * @param int $id
+     * @return Game|null
+     * @throws NonUniqueResultException
+     */
+    public function findGameById(int $id): ?Game {
+        return $this->createQueryBuilder('game')
+            ->select('game')
+            ->join('game.genres', 'genres')
+            ->where('game.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     /**
@@ -42,32 +61,35 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
-    // /**
-    //  * @return Game[] Returns an array of Game objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
+    /**
+     * @param int $limit
+     * @return array
+     */
+    public function findMostPlayedGame(int $limit): array {
+        return $this->createQueryBuilder('game')
+            ->select('game')
+            ->join(Library::class, 'library', Join::WITH, 'library.game = game')
+            ->groupBy('game.name')
+            ->orderBy( 'SUM(library.gameTime)', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Game
+    /**
+     * Return all game name
+     *
+     * @param string $name
+     * @return array
+     */
+    public function findAllNames(string $name): array
     {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('game')
+            ->select('game.name', 'game.id')
+            ->where('game.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }

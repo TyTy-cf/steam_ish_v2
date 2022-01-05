@@ -11,3 +11,8 @@ account:
       empty: 'Aucun compte'
 home:
   title: 'SteamIsh :)'
+  menu:
+    accounts: 'Les comptes'
+    games: 'Les jeux'
+  search:
+    placeholder: 'Jeux...'

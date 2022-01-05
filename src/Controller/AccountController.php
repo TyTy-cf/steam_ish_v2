@@ -19,7 +19,7 @@ class AccountController extends AbstractController
     public function index(AccountRepository $accountRepository): Response
     {
         return $this->render('account/index.html.twig', [
-            'accounts' => [],
+            'accounts' => $accountRepository->findAllWithRelations(),
         ]);
     }
 

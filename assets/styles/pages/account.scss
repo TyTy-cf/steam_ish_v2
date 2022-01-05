@@ -1,0 +1,8 @@
+
+.logo-link {
+  color: $default-white;
+
+  &:hover {
+    color: darken($default-white, 10%);
+  }
+}

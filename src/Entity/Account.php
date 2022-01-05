@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AccountRepository::class)
- * @ORM\Table(uniqueConstraints="email")
  */
 class Account
 {

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ game.name }}</h1>
+{% endblock %}
+
+{% block title %}
+    {{ game.name|upper }}
+{% endblock %}
+
