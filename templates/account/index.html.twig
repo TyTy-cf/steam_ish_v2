@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Les comptes{% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid">
+    <div class="container">
         <table class="table table-striped table-dark text-center table-hover">
             <thead>
                 <tr>
@@ -12,6 +12,7 @@
                     <th>Nickname</th>
                     <th>Email</th>
                     <th>Nb games</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,11 @@
                         <td>{{ account.nickname }}</td>
                         <td>{{ account.email }}</td>
                         <td>{{ account.libraries|length }}</td>
+                        <td>
+                            <a href="{{ path('account_show', {'name': account.name}) }}">
+                                <i class="far fa-eye"></i>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             {% else %}
