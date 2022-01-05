@@ -24,7 +24,7 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/{name}", name="account_show", methods={GET})
+     * @Route("/{name}", name="account_show")
      */
     public function show(string $name): Response
     {

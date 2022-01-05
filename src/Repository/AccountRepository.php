@@ -37,6 +37,8 @@ class AccountRepository extends ServiceEntityRepository
             ->select('account', 'libraries')
             ->join('account.libraries', 'libraries')
             ->orderBy($order, 'ASC')
+            ->groupBy('account.name')
+            ->setMaxResults(25)
             ->getQuery()
             ->getResult()
         ;
