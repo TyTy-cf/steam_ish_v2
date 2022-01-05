@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les comptes{% endblock %}
+{% block title %}{{ 'account.index.title'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -8,10 +8,10 @@
         <table class="table table-striped table-dark text-center table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Nickname</th>
-                    <th>Email</th>
-                    <th>Nb games</th>
+                    <th>{{ 'account.index.table.name'|trans }}</th>
+                    <th>{{ 'account.index.table.nickname'|trans }}</th>
+                    <th>{{ 'account.index.table.email'|trans }}</th>
+                    <th>{{ 'account.index.table.nb_games'|trans }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="4">Pas de comptes</td>
+                    <td colspan="5">{{ 'account.index.table.empty'|trans }}</td>
                 </tr>
             {% endif %}
             </tbody>

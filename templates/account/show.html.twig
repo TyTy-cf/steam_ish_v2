@@ -6,21 +6,19 @@
 
 {% block body %}
 
-    {{ show }}
-
     <br>
-
-{#    {{ account.email }}#}
-{#    <br>#}
-
-{#    {{ account.name }}#}
-{#    <br>#}
-
-{#    {{ account.nickname }}#}
-
-{#    <br>#}
-
-{#    {{ account.libraries|length }}#}
+    <div class="container">
+        <div class="text-center">
+            <h4>{{ 'account.index.table.name'|trans }}</h4>
+            <p>{{ account.name }}</p>
+            <h4>{{ 'account.index.table.email'|trans }}</h4>
+            <p>{{ account.email }}</p>
+            <h4>{{ 'account.index.table.nickname'|trans }}</h4>
+            <p>{{ account.nickname }}</p>
+            <h4>{{ 'account.index.table.wallet'|trans }}</h4>
+            <p>{{ account.wallet }}</p>
+        </div>
+    </div>
 
 {% endblock %}
 

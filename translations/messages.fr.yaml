@@ -1,0 +1,13 @@
+
+account:
+  index:
+    title: 'Tous les comptes'
+    table:
+      name: 'Nom'
+      nickname: 'Pseudo'
+      email: 'Courriel'
+      nb_games: 'Quantité jeux'
+      wallet: 'Portefeuille'
+      empty: 'Aucun compte'
+home:
+  title: 'SteamIsh :)'
