@@ -14,3 +14,18 @@
 Exemple de page :
 
 https://www.instant-gaming.com/en/9595-buy-forza-horizon-5-deluxe-edition-pc-xbox-one-xbox-series-xs-deluxe-edition-pc-xbox-one-xbox-serie-x-s-game-microsoft-store/
+
+## Exercice Command
+
+Réalisez une commande Symfony, permettant de générer des slugs à partir de l'attribut "name" du jeu.
+
+Pour cela vous devez :
+- Modifier votre entité Game, pour ajouter un attribut "slug" de type string, de taille 255, et nullable
+- Générer la migration et exécutez la
+- Votre classe de Command (celle qui étend Command), doit connaître TextService afin de pouvoir utiliser la fonction slugify qu'elle contient
+- Elle doit aussi pouvoir récupérer tous les jeux depuis la base de données... Elle devra donc connaître une autre classe...
+- La fonction execute de la commande doit :
+- Parcourir les différents jeux
+- Pour chacun d'entre eux mettre à jour son slug à partir du name, puis les persist (via l'EntityManager)
+- Une fois qu'ils seront tous modifiés, les update en base de données (flush)
+- Passez votre commande pour la tester
