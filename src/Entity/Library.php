@@ -110,4 +110,19 @@ class Library
 
         return $this;
     }
+
+    /**
+     * Converti l'attribut gameTime (qui est en seconde)
+     *
+     * @return string
+     */
+    public function getTimeConverter(): string {
+        $minutes = $this->gameTime % 60;
+        $hours = floor($this->gameTime / 60);
+        $hours = $hours % 60;
+        if ($minutes < 10) {
+            $minutes = '0' . $minutes;
+        }
+        return $hours. 'h' . $minutes;
+    }
 }

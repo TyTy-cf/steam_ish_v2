@@ -10,7 +10,7 @@
             {% include 'common/partial/game_loop.html.twig' with
                 {
                     'games': alphaGames,
-                    'classCss': 'col-20',
+                    'classCss': 'col-20 col-md-4',
                     'containerImage': 'container-image'
                 }
             %}
@@ -21,7 +21,7 @@
             {% include 'common/partial/game_loop.html.twig' with
                 {
                     'games': lastPublishedGames,
-                    'classCss': 'col-3',
+                    'classCss': 'col-lg-3 col-md-6',
                     'containerImage': 'container-image-higher'
                 }
             %}
@@ -32,7 +32,7 @@
             {% include 'common/partial/comment_loop.html.twig' with
                 {
                     'comments': lastComments,
-                    'classCss': 'col-3'
+                    'classCss': 'col-lg-3 col-md-6'
                 }
             %}
         </div>
@@ -42,7 +42,7 @@
             {% include 'common/partial/game_loop.html.twig' with
                 {
                     'games': mostPlayedGames,
-                    'classCss': 'col-20',
+                    'classCss': 'col-20 col-md-4',
                     'containerImage': 'container-image'
                 }
             %}

@@ -28,6 +28,9 @@ class AccountController extends AbstractController
      */
     public function show(Account $account): Response
     {
+        foreach($account->getLibraries() as $lib) {
+            dump($lib->getTimeConverter());
+        }
         return $this->render('account/show.html.twig', [
             'show' => 'show',
             'account' => $account,
