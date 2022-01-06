@@ -1,0 +1,24 @@
+
+.comment-card {
+  color: $background-title;
+  height: 160px;
+
+  .card-header {
+    a {
+      color: $background-title;
+      text-decoration: none;
+      &:hover {
+        color: $default-orange;
+      }
+    }
+  }
+  .card-footer {
+    a {
+      color: $background-title;
+      text-decoration: none;
+      &:hover {
+        color: $default-orange;
+      }
+    }
+  }
+}

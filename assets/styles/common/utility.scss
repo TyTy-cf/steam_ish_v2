@@ -1,0 +1,20 @@
+
+.col-20 {
+  flex: 0 0 auto;
+  width: 20%;
+}
+
+.container-image {
+
+  height: 200px;
+
+  &-higher {
+    height: 280px;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+

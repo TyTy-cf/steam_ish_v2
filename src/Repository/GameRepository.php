@@ -65,12 +65,17 @@ class GameRepository extends ServiceEntityRepository
      * @param int $limit
      * @return array
      */
-    public function findMostPlayedGame(int $limit): array {
-        return $this->createQueryBuilder('game')
-            ->select('game')
-            ->join(Library::class, 'library', Join::WITH, 'library.game = game')
-            ->groupBy('game.name')
-            ->orderBy( 'SUM(library.gameTime)', 'DESC')
+    public function findMostPlayedGame(int $limit = 10): array {
+        // SELECT game.name, SUM(library.game_time) AS sumTime
+        // FROM game
+        // JOIN library ON game.id = library.game_id
+        // GROUP BY game.name
+        // ORDER BY sumTime DESC
+        return $this->createQueryBuilder('g')
+            ->select('g')
+            ->join(Library::class, 'lib', Join::WITH, 'lib.game = g')
+            ->groupBy('g.name')
+            ->orderBy( 'SUM(lib.gameTime)', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()

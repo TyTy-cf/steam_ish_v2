@@ -7,11 +7,14 @@
             </a>
         </div>
         <div class="card-body">
-            {{ comment.content|slice(0, 50) }}...
+            {{ comment.content|slice(0, 50) }}{% if comment.content|length > 50 %}...{% endif %}
         </div>
         <div class="card-footer">
             <a href="{{ path('account_show', {'name': comment.account.name}) }}">
-                {{ 'home.menu.comment.writted_by'|trans({'%account%': comment.account.name, '%date%': comment.createdAt|date('d/m/Y')}) }}
+                {{ 'home.menu.comment.writted_by'|trans({
+                    '%name%': comment.account.name,
+                    '%date%': comment.createdAt|date('d/m/Y')
+                }) }}
             </a>
         </div>
     </div>

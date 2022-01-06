@@ -22,17 +22,15 @@ class AccountRepository extends ServiceEntityRepository
     /**
      * Requête optimiser pour récupérer tous les account avec leurs bibliothèques
      *
+     * @param string $order
      * @return array
      */
     public function findAllWithRelations(string $order = 'account.name'): array
     {
-        /*
-         * SELECT *
-         * FROM account
-         * JOIN library
-         *  ON library.account_id = account.id
-         * ORDER BY account.name;
-         */
+        // SELECT *
+        // FROM account AS account
+        // JOIN library ON library.account_id = account.id
+        // ORDER BY account.name ASC => par défaut
         return $this->createQueryBuilder('account')
             ->select('account', 'libraries')
             ->join('account.libraries', 'libraries')

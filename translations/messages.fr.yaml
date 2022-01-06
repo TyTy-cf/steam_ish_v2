@@ -19,6 +19,6 @@ home:
     last_comments: 'Les derniers commentaires'
     most_played: 'Les jeux les plus jouer'
     comment:
-      writted_by: 'Par %account% le %date%'
+      writted_by: 'Par %name% le %date%'
   search:
     placeholder: 'Jeux...'

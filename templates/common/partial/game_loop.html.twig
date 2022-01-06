@@ -1,8 +1,8 @@
 
 {% for game in games %}
-    <a href="{{ path('game_show', {'id': game.id}) }}" class="{{ classCss }} my-2">
+    <a href="{{ path('game_show', {'id': game.id}) }}" class="{{ classCss }} my-2  text-decoration-none">
         <div class="card-game">
-            <div class="container-image">
+            <div class="{{ containerImage }}">
                 <img class="img-fluid" src="{{ game.thumbnailCover }}">
                 <div class="container-price">
                     <div class="price">
@@ -11,9 +11,9 @@
                 </div>
             </div>
             <div class="card-bottom">
-                <span>
+                <p class="text-center">
                     {{ game.name }}
-                </span>
+                </p>
             </div>
         </div>
     </a>
