@@ -35,11 +35,10 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/detail/{id}", name="game_show")
+     * @Route("/detail/{slug}", name="game_show")
      */
     public function show(Game $game): Response
     {
-        dump($game);
         return $this->render('game/show.html.twig', [
             'game' => $game,
         ]);

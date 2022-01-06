@@ -22,6 +22,7 @@
 }
 
 .autocomplete-item {
+  color: $background-title;
   &:hover,
   > div.selected {
     background: $background-title;

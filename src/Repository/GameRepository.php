@@ -91,7 +91,7 @@ class GameRepository extends ServiceEntityRepository
     public function findAllNames(string $name): array
     {
         return $this->createQueryBuilder('game')
-            ->select('game.name', 'game.id')
+            ->select('game.name', 'game.slug')
             ->where('game.name LIKE :name')
             ->setParameter('name', '%' . $name . '%')
             ->getQuery()

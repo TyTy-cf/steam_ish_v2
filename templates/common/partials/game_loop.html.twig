@@ -1,6 +1,6 @@
 
 {% for game in games %}
-    <a href="{{ path('game_show', {'id': game.id}) }}" class="{{ classCss }} my-2  text-decoration-none">
+    <a href="{{ path('game_show', {'slug': game.slug}) }}" class="{{ classCss }} my-2 text-decoration-none">
         <div class="card-game">
             <div class="{{ containerImage }}">
                 <img class="img-fluid" src="{{ game.thumbnailCover }}">

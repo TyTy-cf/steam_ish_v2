@@ -61,6 +61,11 @@ class Game
      */
     private Collection $genres;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $slug;
+
     public function __construct()
     {
         $this->languages = new ArrayCollection();
@@ -188,6 +193,18 @@ class Game
     public function removeGenre(Genre $genre): self
     {
         $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

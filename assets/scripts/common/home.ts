@@ -28,7 +28,7 @@ window.addEventListener('load', () => {
             },
             onSelect: function(item) {
                 inputSearch.value = item.name;
-                window.location.href = '/game/detail/' + item.id;
+                window.location.href = '/game/detail/' + item.slug;
             },
             render: function(item) {
                 const itemElement = document.createElement("div");

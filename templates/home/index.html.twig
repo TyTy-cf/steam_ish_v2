@@ -7,7 +7,7 @@
     <div class="container my-1">
         <h2 class="my-1">{{ 'home.menu.most_games'|trans }}</h2>
         <div class="row">
-            {% include 'common/partial/game_loop.html.twig' with
+            {% include 'common/partials/game_loop.html.twig' with
                 {
                     'games': alphaGames,
                     'classCss': 'col-20 col-md-4',
@@ -18,7 +18,7 @@
 
         <h2 class="my-1">{{ 'home.menu.recent_games'|trans }}</h2>
         <div class="row">
-            {% include 'common/partial/game_loop.html.twig' with
+            {% include 'common/partials/game_loop.html.twig' with
                 {
                     'games': lastPublishedGames,
                     'classCss': 'col-lg-3 col-md-6',
@@ -29,7 +29,7 @@
 
         <h2 class="my-1">{{ 'home.menu.last_comments'|trans }}</h2>
         <div class="row">
-            {% include 'common/partial/comment_loop.html.twig' with
+            {% include 'common/partials/comment_loop.html.twig' with
                 {
                     'comments': lastComments,
                     'classCss': 'col-lg-3 col-md-6'
@@ -39,7 +39,7 @@
 
         <h2 class="my-1">{{ 'home.menu.most_played'|trans }}</h2>
         <div class="row">
-            {% include 'common/partial/game_loop.html.twig' with
+            {% include 'common/partials/game_loop.html.twig' with
                 {
                     'games': mostPlayedGames,
                     'classCss': 'col-20 col-md-4',

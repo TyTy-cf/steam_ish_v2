@@ -71,7 +71,7 @@ class TextService
         $text = preg_replace('~-+~', '-', $text);
 
         // add a - before an uppercase letter
-        $text = preg_replace('/(?<!\ )[A-Z]/', '-$0', $text);
+        $text = preg_replace('/(?<!\ )[A-Z]/', '$0', $text);
 
         // check if the 1st letter become a - and remove it
         if (substr($text, 0, 1) === '-')
