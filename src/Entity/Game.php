@@ -62,6 +62,11 @@ class Game
     private Collection $genres;
 
     /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="game")
+     */
+    private Collection $comments;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $slug;
@@ -70,6 +75,7 @@ class Game
     {
         $this->languages = new ArrayCollection();
         $this->genres = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +199,30 @@ class Game
     public function removeGenre(Genre $genre): self
     {
         $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
 
         return $this;
     }

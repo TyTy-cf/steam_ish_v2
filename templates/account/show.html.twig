@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-
+    {{ 'account.show.title'|trans({'%name%': account.name}) }}
 {% endblock %}
 
 {% block body %}

@@ -35,12 +35,20 @@ class Library
     private ?DateTime $lastUsed;
 
     /**
+     * Dans une relation (ManyToOne OU ManyToMany) s'il n'y a pas d'inversedBy, alors :
+     * On est dans une relation dites "Unilatérale", c'est-à-dire que l'entité courante
+     * connaît l'autre entité, mais l'autre entité ne connait pas la classe courante
+     *
      * @ORM\ManyToOne(targetEntity=Game::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private Game $game;
 
     /**
+     * Dans une relation (ManyToOne OU ManyToMany) s'il y a un inversedBy, alors :
+     * On est dans une relation dites "Bilatérale", c'est-à-dire que l'entité courante
+     * connaît l'autre entité, l'autre entité connait la classe courante
+     *
      * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="libraries")
      * @ORM\JoinColumn(nullable=false)
      */

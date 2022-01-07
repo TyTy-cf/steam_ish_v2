@@ -9,6 +9,8 @@ account:
       nb_games: 'Quantité jeux'
       wallet: 'Portefeuille'
       empty: 'Aucun compte'
+  show:
+    title: 'Détails du compte %name%'
 home:
   title: 'SteamIsh :)'
   menu:
@@ -22,3 +24,6 @@ home:
       writted_by: 'Par %name% le %date%'
   search:
     placeholder: 'Jeux...'
+game:
+  index:
+    title: 'Tous les jeux'

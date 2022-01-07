@@ -29,3 +29,15 @@ Pour cela vous devez :
 - Pour chacun d'entre eux mettre à jour son slug à partir du name, puis les persist (via l'EntityManager)
 - Une fois qu'ils seront tous modifiés, les update en base de données (flush)
 - Passez votre commande pour la tester
+
+## Exercice - Account Detail
+
+Depuis la page de tous les comptes, lorsque je clique sur l'oeil pour voir le détail du compte, je vais sur cette page (account_detail)
+
+Je veux un récap de toutes les informations d'un Account (avec le montant de son portefeuille)
+
+Un affichage de tous ses jeux, avec le temps en h:m de ceux-ci
+
+Si vous vous sentez chaud... Le temps de jeu total !
+
+On ajoutera aussi une section permettant de voir les 4 derniers commentaires postés par l'utilisateur, et un moyen (de votre choix) pour voir tous ceux qu'il a posté

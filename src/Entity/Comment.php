@@ -45,7 +45,7 @@ class Comment
     private Account $account;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Game::class)
+     * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private Game $game;

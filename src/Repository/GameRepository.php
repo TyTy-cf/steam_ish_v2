@@ -23,16 +23,17 @@ class GameRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $id
+     * @param string $slug
      * @return Game|null
      * @throws NonUniqueResultException
      */
-    public function findGameById(int $id): ?Game {
-        return $this->createQueryBuilder('game')
-            ->select('game')
-            ->join('game.genres', 'genres')
-            ->where('game.id = :id')
-            ->setParameter('id', $id)
+    public function findGameBySlug(string $slug): ?Game {
+        return $this->createQueryBuilder('g')
+            ->select('g')
+            ->join('g.genres', 'genres')
+            ->join('g.languages', 'languages')
+            ->where('g.slug = :slug')
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -66,16 +67,17 @@ class GameRepository extends ServiceEntityRepository
      * @return array
      */
     public function findMostPlayedGame(int $limit = 10): array {
-        // SELECT game.name, SUM(library.game_time) AS sumTime
-        // FROM game
-        // JOIN library ON game.id = library.game_id
-        // GROUP BY game.name
-        // ORDER BY sumTime DESC
+        // FROM game AS g
         return $this->createQueryBuilder('g')
+            // SELECT g.*
             ->select('g')
+            // JOIN library AS lib ON g.id = lib.game_id
             ->join(Library::class, 'lib', Join::WITH, 'lib.game = g')
+            // GROUP BY g.name
             ->groupBy('g.name')
+            // ORDER BY SUM(lib.game_time) DESC
             ->orderBy( 'SUM(lib.gameTime)', 'DESC')
+            // LIMIT $limit (par défaut 10)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
@@ -90,8 +92,11 @@ class GameRepository extends ServiceEntityRepository
      */
     public function findAllNames(string $name): array
     {
+        // FROM game AS game
         return $this->createQueryBuilder('game')
+            // SELECT game.name, game.slug
             ->select('game.name', 'game.slug')
+            // WHERE game.name LIKE '%$name%' => $name est un paramètre
             ->where('game.name LIKE :name')
             ->setParameter('name', '%' . $name . '%')
             ->getQuery()

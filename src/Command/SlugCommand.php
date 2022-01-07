@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\Game;
 use App\Repository\GameRepository;
 use App\Service\TextService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -49,11 +50,15 @@ class SlugCommand extends Command
         $progressBar->start();
         foreach($games as $game) {
             $game->setSlug($this->textService->slugify($game->getName()));
+            // persist :
+            // - Si l'entité en paramètre a un id null, alors > INSERT
+            // - SI l'entité en paramètre a un id non-null, alors > UPDATE
             $this->em->persist($game);
             $progressBar->advance();
         }
         $progressBar->finish();
-        // indiquer à doctrine qu'il doit tirer la chasse
+        // indiquer à doctrine qu'il doit "tirer la chasse"
+        // Autrement dit : exécuter toutes les "requêtes" du persist
         $this->em->flush();
         $output->writeln('');
         $output->writeln('Command finished !');
