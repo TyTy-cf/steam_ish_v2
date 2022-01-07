@@ -7,6 +7,58 @@
 {% block body %}
     <div class="container">
         <h1>{{ game.name }}</h1>
+        <div class="row">
+            <div class="col-4">
+                <img class="img-fluid" src="{{ game.thumbnailCover }}">
+            </div>
+            <div class="col-8">
+                {% if game.thumbnailLogo is not null %}
+                    <div class="text-center container-image-logo mb-5">
+                        <img class="img-fluid" src="{{ game.thumbnailLogo }}" alt="Game logo">
+                    </div>
+                {% endif %}
+                <div>
+                    {% for genre in game.genres %}
+                        <span class="game-item">{{ genre.name }}</span>
+                    {% endfor %}
+                </div>
+                <div class="my-4">
+                    {% for language in game.languages %}
+                        <span class="game-item">{{ language.name }}</span>
+                    {% endfor %}
+                </div>
+                <div class="game-description">
+                    {{ game.description|raw }}
+                </div>
+                <div class="game-price mt-4">
+                    {{ game.price }}€
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <h4 class="text-center">{{ 'game.show.all_comments'|trans }}</h4>
+            <div class="row">
+                {% include 'common/partials/comment_loop.html.twig' with
+                    {
+                        'isHidden': 1,
+                        'comments': game.comments[0:10],
+                        'classCss': 'col-20'
+                    }
+                %}
+            </div>
+        </div>
+        <div class="mt-4">
+            <h4 class="text-center">{{ 'game.show.related_games'|trans }}</h4>
+            <div class="row">
+                {% include 'common/partials/game_loop.html.twig' with
+                    {
+                        'games': relatedGames,
+                        'classCss': 'col-20',
+                        'containerImage': 'container-image'
+                    }
+                %}
+            </div>
+        </div>
     </div>
 {% endblock %}
 

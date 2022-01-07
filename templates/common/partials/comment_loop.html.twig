@@ -1,21 +1,29 @@
 
 {% for comment in comments %}
-    <div class="p-1 card {{ classCss }} my-2 comment-card">
-        <div class="card-header">
-            <a href="{{ path('game_show', {'slug': comment.game.slug}) }}">
-                {{ comment.game.name }}
-            </a>
-        </div>
-        <div class="card-body">
-            {{ comment.content|slice(0, 50) }}{% if comment.content|length > 50 %}...{% endif %}
-        </div>
-        <div class="card-footer">
-            <a href="{{ path('account_show', {'name': comment.account.name}) }}">
-                {{ 'home.menu.comment.writted_by'|trans({
-                    '%name%': comment.account.name,
-                    '%date%': comment.createdAt|date('d/m/Y')
-                }) }}
-            </a>
+    <div class="{{ classCss }} p-1">
+        <div class="my-2 comment-card">
+            <div class="comment-card-game">
+                <a class="{% if isHidden %}d-none{% endif %}" href="{{ path('game_show', {'slug': comment.game.slug}) }}">
+                    {{ comment.game.name }}
+                </a>
+            </div>
+            <div class="comment-card-body">
+                <p class="float-end">
+                    {{ 'home.menu.comment.writted_on'|trans({
+                        '%date%': comment.createdAt|date('d/m/Y')
+                    }) }}
+                </p>
+                <div class="d-inline-block">
+                    {{ comment.content|slice(0, 60) }}{% if comment.content|length > 60 %}...{% endif %}
+                </div>
+            </div>
+            <div class="comment-card-footer">
+                <a href="{{ path('account_show', {'name': comment.account.name}) }}">
+                    {{ 'home.menu.comment.writted_by'|trans({
+                        '%name%': comment.account.name,
+                    }) }}
+                </a>
+            </div>
         </div>
     </div>
 {% endfor %}

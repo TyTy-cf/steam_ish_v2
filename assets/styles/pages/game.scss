@@ -1,5 +1,19 @@
 
-body {
-  background-color: $default-background-color;
+.game-item {
+  border-radius: 0.3em;
+  border: 1px solid $background-lighter;
+  background-color: $default-background-color-l15;
   color: $background-lighter;
+  padding: 0.2em 0.4em;
+}
+
+.game-price {
+  height: auto;
+  background-color: $default-orange;
+  color: $background-lighter;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-shadow: 0 0 4px #000;
+  padding: 0.3em 0.5em;
+  border-radius: 0.3em;
 }

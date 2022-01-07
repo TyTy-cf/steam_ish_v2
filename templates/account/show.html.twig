@@ -18,6 +18,21 @@
             <h4>{{ 'account.index.table.wallet'|trans }}</h4>
             <p>{{ account.wallet }}</p>
         </div>
+        <div class="row">
+            {% for lib in account.libraries %}
+                <div class="col-20">
+                    {{ lib.game.name }}
+                    {{ lib.timeConverter }}
+                </div>
+{#                {% include 'common/partials/game-card.html.twig' with#}
+{#                    {#}
+{#                        'game': lib.game,#}
+{#                        'classCss': 'col-20 col-md-4',#}
+{#                        'containerImage': 'container-image'#}
+{#                    }#}
+{#                %}#}
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

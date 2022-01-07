@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Game;
 use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,11 +30,14 @@ class GameRepository extends ServiceEntityRepository
      */
     public function findGameBySlug(string $slug): ?Game {
         return $this->createQueryBuilder('g')
-            ->select('g')
+            ->select('g', 'genres', 'languages', 'comments', 'account')
             ->join('g.genres', 'genres')
             ->join('g.languages', 'languages')
+            ->join('g.comments', 'comments')
+            ->join('comments.account', 'account')
             ->where('g.slug = :slug')
             ->setParameter('slug', $slug)
+            ->orderBy('comments.createdAt', 'DESC')
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -102,5 +106,24 @@ class GameRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @param Collection $genres
+     * @param int $limit
+     * @return array
+     */
+    public function findRelatedGameByGenres(Collection $genres, int $limit = 5): array
+    {
+        return $this->createQueryBuilder('game')
+            ->select('game')
+            ->join('game.genres', 'genres')
+            ->where('genres IN(:genres)')
+            ->setParameter('genres', $genres)
+            ->orderBy('game.publishedAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

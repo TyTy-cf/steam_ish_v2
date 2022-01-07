@@ -21,9 +21,13 @@ home:
     last_comments: 'Les derniers commentaires'
     most_played: 'Les jeux les plus jouer'
     comment:
-      writted_by: 'Par %name% le %date%'
+      writted_by: 'Par %name%'
+      writted_on: 'Le %date%'
   search:
     placeholder: 'Jeux...'
 game:
   index:
     title: 'Tous les jeux'
+  show:
+    all_comments: 'Les derniers commentaires'
+    related_games: 'Les jeux similaires'
