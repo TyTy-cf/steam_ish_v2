@@ -14,6 +14,9 @@
 
   &-logo {
     height: 80px;
+    > img {
+      width: auto;
+    }
   }
 }
 
@@ -22,3 +25,13 @@
   width: 100%;
 }
 
+.btn-info {
+  color: $background-lighter;
+  border-color: $default-background-color-l15;
+  background-color: $default-background-color;
+  &:hover {
+    color: $default-background-color;
+    border-color: $default-background-color-l15;
+    background-color: $default-background-color-l30;
+  }
+}

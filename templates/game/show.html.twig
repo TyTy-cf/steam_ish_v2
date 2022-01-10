@@ -6,17 +6,12 @@
 
 {% block body %}
     <div class="container">
-        <h1>{{ game.name }}</h1>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-4">
-                <img class="img-fluid" src="{{ game.thumbnailCover }}">
+                <img class="img-100" src="{{ game.thumbnailCover }}">
             </div>
             <div class="col-8">
-                {% if game.thumbnailLogo is not null %}
-                    <div class="text-center container-image-logo mb-5">
-                        <img class="img-fluid" src="{{ game.thumbnailLogo }}" alt="Game logo">
-                    </div>
-                {% endif %}
+                <h1 class="text-center">{{ game.name }}</h1>
                 <div>
                     {% for genre in game.genres %}
                         <span class="game-item">{{ genre.name }}</span>
