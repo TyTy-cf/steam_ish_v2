@@ -116,7 +116,7 @@ class GameRepository extends ServiceEntityRepository
     public function findRelatedGameByGenres(Collection $genres, int $limit = 5): array
     {
         return $this->createQueryBuilder('game')
-            ->select('game')
+            ->select('game', 'genres')
             ->join('game.genres', 'genres')
             ->where('genres IN(:genres)')
             ->setParameter('genres', $genres)

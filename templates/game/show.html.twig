@@ -36,7 +36,12 @@
             </div>
         </div>
         <div class="mt-4">
-            <h4 class="text-center">{{ 'game.show.all_comments'|trans }}</h4>
+            <div class="row">
+                <h4 class="text-center col-10 offset-1">{{ 'game.show.all_comments'|trans }}</h4>
+                <a class="btn btn-outline-light col-1" href="{{ path('comments_game', {'slug': game.slug}) }}">
+                    {{ 'general.see_all'|trans }}
+                </a>
+            </div>
             <div class="row">
                 {% include 'common/partials/comment_loop.html.twig' with
                     {
@@ -54,7 +59,8 @@
                     {
                         'games': relatedGames,
                         'classCss': 'col-20',
-                        'containerImage': 'container-image'
+                        'containerImage': 'container-image',
+                        'genreDisplayed': true
                     }
                 %}
             </div>

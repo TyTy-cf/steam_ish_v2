@@ -31,3 +31,7 @@ game:
   show:
     all_comments: 'Les derniers commentaires'
     related_games: 'Les jeux similaires'
+  comment:
+    details: 'Les commentaires de %game%'
+general:
+  see_all: 'Voir tout'

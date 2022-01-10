@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\Game;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -31,6 +32,24 @@ class CommentRepository extends ServiceEntityRepository
             ->join('comment.game', 'game')
             ->orderBy('comment.createdAt', 'DESC')
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @param Game $game le slug du jeu attendu
+     * @return array
+     */
+    public function findCommentsByGame(Game $game): array
+    {
+        return $this->createQueryBuilder('comment')
+            ->select('comment', 'account')
+            ->join('comment.game', 'game')
+            ->join('comment.account', 'account')
+            ->where('game = :game')
+            ->setParameter('game', $game)
+            ->orderBy('comment.createdAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;

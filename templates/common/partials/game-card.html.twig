@@ -1,17 +1,23 @@
-<a href="{{ path('game_show', {'slug': game.slug}) }}" class="{{ classCss }} my-2 text-decoration-none">
-    <div class="card-game">
-        <div class="{{ containerImage }}">
-            <img class="img-100" src="{{ game.thumbnailCover }}">
-            <div class="container-price">
-                <div class="price">
-                    {{ game.price }}€
+
+<div class="{{ classCss }}">
+    {% if genreDisplayed is defined %}
+        <p class="game-item">{{ game.genres[0].name }}</p>
+    {% endif %}
+    <a href="{{ path('game_show', {'slug': game.slug}) }}" class="{{ classCss }} my-2 text-decoration-none">
+        <div class="card-game">
+            <div class="{{ containerImage }}">
+                <img class="img-100" src="{{ game.thumbnailCover }}">
+                <div class="container-price">
+                    <div class="price">
+                        {{ game.price }}€
+                    </div>
                 </div>
             </div>
+            <div class="card-bottom">
+                <p class="text-center">
+                    {{ game.name }}
+                </p>
+            </div>
         </div>
-        <div class="card-bottom">
-            <p class="text-center">
-                {{ game.name }}
-            </p>
-        </div>
-    </div>
-</a>
+    </a>
+</div>
