@@ -35,7 +35,7 @@ class Country
     private string $flag;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="languages")
+     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="countries")
      */
     private Collection $games;
 

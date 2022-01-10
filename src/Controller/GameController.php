@@ -40,14 +40,16 @@ class GameController extends AbstractController
 
     /**
      * @Route("/{slug}", name="game_show")
+     * @param string $slug
+     * @return Response
      * @throws NonUniqueResultException
      */
     public function show(string $slug): Response
     {
-        $games = $this->gameRepository->findGameBySlug($slug);
+        $game = $this->gameRepository->findGameBySlug($slug);
         return $this->render('game/show.html.twig', [
-            'game' => $games,
-            'relatedGames' => $this->gameRepository->findRelatedGameByGenres($games->getGenres(), 5),
+            'game' => $game,
+            'relatedGames' => $this->gameRepository->findRelatedGameByGenres($game->getGenres(), 5),
         ]);
     }
 }

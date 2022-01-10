@@ -51,6 +51,10 @@ On ajoutera aussi une section permettant de voir les 4 derniers commentaires pos
 ## Exercice - Formulaire
 
 
+Créer en premier un formulaire pour gérer les Country !
+
+(new/edit/index)
+
 Faire le formulaire de création d'un "Publisher" (éditeur de jeu)
 
 Ce formulaire ne devra pas gérer la collection pour le moment (afin de simplifier le formulaire en question).
