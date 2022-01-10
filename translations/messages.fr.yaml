@@ -9,8 +9,13 @@ account:
       nb_games: 'Quantité jeux'
       wallet: 'Portefeuille'
       empty: 'Aucun compte'
+    create: 'Créer un compte'
   show:
     title: 'Détails du compte %name%'
+  new:
+    title: "Création d'un compte"
+  edit:
+    title: "Modification d'un compte"
 home:
   title: 'SteamIsh :)'
   menu:
@@ -35,3 +40,8 @@ game:
     details: 'Les commentaires de %game%'
 general:
   see_all: 'Voir tout'
+  button:
+    submit: 'Valider'
+genre:
+  new:
+    title: "Ajout d'un genre"

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AccountRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,7 +35,7 @@ class Account
     private ?string $nickname;
 
     /**
-     * @ORM\Column(type="float", options={"default" : 0})
+     * @ORM\Column(type="float")
      */
     private float $wallet;
 
@@ -42,6 +43,12 @@ class Account
      * @ORM\OneToMany(targetEntity=Library::class, mappedBy="account")
      */
     private Collection $libraries;
+
+    public function __construct()
+    {
+        $this->libraries = new ArrayCollection();
+        $this->wallet = 0.0;
+    }
 
     public function getId(): ?int
     {

@@ -50,6 +50,12 @@ class Comment
      */
     private Game $game;
 
+    public function __construct()
+    {
+        $this->downVotes = 0;
+        $this->upVotes = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

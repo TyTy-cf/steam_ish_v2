@@ -54,6 +54,13 @@ class Library
      */
     private Account $account;
 
+    public function __construct()
+    {
+        $this->gameTime = 0.0;
+        $this->installed = false;
+    }
+
+
     public function getId(): int
     {
         return $this->id;

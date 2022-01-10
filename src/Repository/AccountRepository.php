@@ -33,7 +33,7 @@ class AccountRepository extends ServiceEntityRepository
         // ORDER BY account.name ASC => par défaut
         return $this->createQueryBuilder('account')
             ->select('account', 'libraries')
-            ->join('account.libraries', 'libraries')
+            ->leftJoin('account.libraries', 'libraries')
             ->orderBy($order, 'ASC')
             ->getQuery()
             ->getResult()
