@@ -45,3 +45,8 @@ general:
 genre:
   new:
     title: "Ajout d'un genre"
+comment:
+  form:
+    content: 'Contenu'
+  new:
+    title: "Ajouter commentaire"

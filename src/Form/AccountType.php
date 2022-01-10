@@ -16,13 +16,22 @@ class AccountType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'account.index.table.name',
+                'attr' => [
+                    'class' => 'bg-dark'
+                ]
             ])
             ->add('email', TextType::class, [
                 'label' => 'account.index.table.email',
+                'attr' => [
+                    'class' => 'bg-dark'
+                ]
             ])
             ->add('nickname', TextType::class, [
                 'label' => 'account.index.table.nickname',
                 'required' => false,
+                'attr' => [
+                    'class' => 'bg-dark'
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'general.button.submit',

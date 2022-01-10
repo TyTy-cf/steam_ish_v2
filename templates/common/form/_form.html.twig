@@ -2,5 +2,9 @@
 <div class="container col-6 mt-1 mx-auto">
     <h1>{{ title|trans }}</h1>
     {{ form_start(form) }}
+{#        <div class="form-group">#}
+{#            {{ form_label(form.name) }}#}
+{#            {{ form_widget(form.name, {'attr': {'class': 'bg-dark'}}) }}#}
+{#        </div>#}
     {{ form_end(form) }}
 </div>
