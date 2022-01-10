@@ -52,9 +52,9 @@ class Game
     private ?string $thumbnailLogo;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Language::class, inversedBy="games")
+     * @ORM\ManyToMany(targetEntity=Country::class, inversedBy="games")
      */
-    private Collection $languages;
+    private Collection $countries;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="games")
@@ -71,9 +71,14 @@ class Game
      */
     private ?string $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Publisher::class, inversedBy="games")
+     */
+    private Publisher $publisher;
+
     public function __construct()
     {
-        $this->languages = new ArrayCollection();
+        $this->countries = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -156,25 +161,25 @@ class Game
     }
 
     /**
-     * @return Collection|Language[]
+     * @return Collection|Country[]
      */
-    public function getLanguages(): Collection
+    public function getCountries(): Collection
     {
-        return $this->languages;
+        return $this->countries;
     }
 
-    public function addLanguage(Language $language): self
+    public function addLanguage(Country $language): self
     {
-        if (!$this->languages->contains($language)) {
-            $this->languages[] = $language;
+        if (!$this->countries->contains($language)) {
+            $this->countries[] = $language;
         }
 
         return $this;
     }
 
-    public function removeLanguage(Language $language): self
+    public function removeLanguage(Country $language): self
     {
-        $this->languages->removeElement($language);
+        $this->countries->removeElement($language);
 
         return $this;
     }
@@ -235,6 +240,18 @@ class Game
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPublisher(): Publisher
+    {
+        return $this->publisher;
+    }
+
+    public function setPublisher(Publisher $publisher): self
+    {
+        $this->publisher = $publisher;
 
         return $this;
     }
