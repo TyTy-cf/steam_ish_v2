@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\LibraryRepository;
 use DateTime;
 use DateTimeInterface;
@@ -9,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=LibraryRepository::class)
+ * @ApiResource()
  */
 class Library
 {
