@@ -39,12 +39,17 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/create", name="account_create")
+     * @param Request $request
+     * @return Response
      */
     public function createAccount(Request $request): Response {
         $form = $this->createForm(AccountType::class, new Account());
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($form->getData());
+            /** @var Account $account */
+            $account = $form->getData();
+//            $account->setSlug($account->getName());
+            $this->em->persist($account);
             $this->em->flush();
             return $this->redirectToRoute('account_index');
         }
@@ -55,6 +60,9 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/edit/{name}", name="account_edit")
+     * @param Request $request
+     * @param Account $account
+     * @return Response
      */
     public function editAccount(Request $request, Account $account): Response {
         $form = $this->createForm(AccountType::class, $account);

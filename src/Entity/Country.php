@@ -32,7 +32,12 @@ class Country
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $flag;
+    private string $urlFlag;
+
+    /**
+     * @ORM\Column(type="string", length=6)
+     */
+    private string $code;
 
     /**
      * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="countries")
@@ -61,14 +66,14 @@ class Country
         return $this;
     }
 
-    public function getFlag(): ?string
+    public function getUrlFlag(): ?string
     {
-        return $this->flag;
+        return $this->urlFlag;
     }
 
-    public function setFlag(string $flag): self
+    public function setUrlFlag(string $urlFlag): self
     {
-        $this->flag = $flag;
+        $this->urlFlag = $urlFlag;
 
         return $this;
     }
@@ -112,6 +117,18 @@ class Country
         if ($this->games->removeElement($game)) {
             $game->removeLanguage($this);
         }
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

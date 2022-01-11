@@ -50,14 +50,19 @@ On ajoutera aussi une section permettant de voir les 4 derniers commentaires pos
 
 ## Exercice - Formulaire
 
+!!!!!!
+Pour aucun des deux formulaires : ignorer les games (les retirer du formulaire)
+!!!!!!
 
-Créer en premier un formulaire pour gérer les Country !
+Créer en premier un formulaire pour gérer les Country, les flags de l'URL seront gérés automatiquement depuis "l'api" au moment de la soumission du formulaire.
+
+Liens vers l'API des drapeaux : https://flagpedia.net/download/api
+
+Prendre le 24x18 : https://flagcdn.com/24x18/xx.png (où xx vaut le code du pays)
 
 (new/edit/index)
 
 Faire le formulaire de création d'un "Publisher" (éditeur de jeu)
-
-Ce formulaire ne devra pas gérer la collection pour le moment (afin de simplifier le formulaire en question).
 
 Vous ferez un formulaire qui sera utilisé pour ajouter un Publisher en base de données (route associée) et un moyen de le modifier
 
