@@ -1,7 +1,11 @@
 
 <div class="{{ classCss }} my-2">
     {% if genreDisplayed is defined %}
-        <p class="game-item">{{ game.genres[0].name }}</p>
+        <a href="{{ path('game_genre', {'slug': game.genres[0].slug }) }}">
+            <p class="game-item">
+                {{ game.genres[0].name }}
+            </p>
+        </a>
     {% endif %}
     <a href="{{ path('game_show', {'slug': game.slug}) }}" class="{{ classCss }} text-decoration-none">
         <div class="card-game">

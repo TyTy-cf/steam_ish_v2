@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use App\Entity\Game;
+use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -50,6 +51,27 @@ class CommentRepository extends ServiceEntityRepository
             ->where('game = :game')
             ->setParameter('game', $game)
             ->orderBy('comment.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @param Genre $genre
+     * @param int $limit
+     * @return int|mixed|string
+     */
+    public function findByGenre(Genre $genre, int $limit = 5): array
+    {
+        return $this->createQueryBuilder('comment')
+            ->select('comment', 'account', 'game')
+            ->leftJoin('comment.game', 'game')
+            ->leftJoin('comment.account', 'account')
+            ->leftJoin('game.genres', 'genres')
+            ->where('genres = :genre')
+            ->setParameter('genre', $genre)
+            ->orderBy('comment.createdAt', 'DESC')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;

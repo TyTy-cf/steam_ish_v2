@@ -21,10 +21,7 @@ class Game
      */
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
+    use TraitSlug;
 
     /**
      * @ORM\Column(type="datetime")
@@ -65,11 +62,6 @@ class Game
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="game")
      */
     private Collection $comments;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $slug;
 
     /**
      * @ORM\ManyToOne(targetEntity=Publisher::class, inversedBy="games")

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ genre.name }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ genre.name }}</h1>
+
+        <h2 class="my-3">{{ 'genre.show.related_games'|trans }}</h2>
+        <div class="row">
+            {% include 'common/partials/game_loop.html.twig' with
+                {
+                    'games': genre.games,
+                    'classCss': 'col-lg-3 col-md-6',
+                    'containerImage': 'container-image-higher'
+                }
+            %}
+        </div>
+
+        <h2 class="my-3">{{ 'genre.show.related_comments'|trans }}</h2>
+        <div class="row">
+            {% include 'common/partials/comment_loop.html.twig' with
+                {
+                    'isHidden': 0,
+                    'comments': lastComments,
+                    'classCss': 'col-lg-3 col-md-6'
+                }
+            %}
+        </div>
+
+    </div>
+
+{% endblock %}
+

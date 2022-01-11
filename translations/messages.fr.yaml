@@ -45,8 +45,34 @@ general:
 genre:
   new:
     title: "Ajout d'un genre"
+  edit:
+    title: 'Modifier un genre'
+  index:
+    create: 'Ajouter un genre'
+    table:
+      name: 'Nom'
+      slug: 'Slug'
+      empty: 'Pas de genres'
+  show:
+    related_games: 'Les jeux'
+    related_comments: 'Les commentaires des derniers jeux'
 comment:
   form:
     content: 'Contenu'
   new:
     title: "Ajouter commentaire"
+country:
+  index:
+    title: 'Liste des pays'
+    flag_alt: 'Drapeau de %country%'
+    table:
+      name: 'Nom'
+      nationality: 'Nationalité'
+      code: 'Code'
+      flag: 'Drapeau'
+      empty: 'Pas de pays'
+    create: "Création d'un pays"
+  new:
+    title: "Ajout d'un pays"
+  edit:
+    title: "Modification d'un pays"

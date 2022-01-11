@@ -19,10 +19,7 @@ class Country
      */
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
+    use TraitSlug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,7 +29,7 @@ class Country
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $urlFlag;
+    private ?string $urlFlag;
 
     /**
      * @ORM\Column(type="string", length=6)
@@ -52,18 +49,6 @@ class Country
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getUrlFlag(): ?string
