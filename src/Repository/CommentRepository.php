@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Account;
 use App\Entity\Comment;
 use App\Entity\Game;
 use App\Entity\Genre;
@@ -33,6 +34,24 @@ class CommentRepository extends ServiceEntityRepository
             ->join('comment.game', 'game')
             ->orderBy('comment.createdAt', 'DESC')
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @param Account $account
+     * @return array
+     */
+    public function findCommentsByAccount(Account $account): array
+    {
+        return $this->createQueryBuilder('comment')
+            ->select('comment', 'game')
+            ->join('comment.game', 'game')
+            ->join('comment.account', 'account')
+            ->where('account = :account')
+            ->setParameter('account', $account)
+            ->orderBy('comment.createdAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;

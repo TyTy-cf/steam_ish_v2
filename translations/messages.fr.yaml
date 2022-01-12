@@ -9,9 +9,12 @@ account:
       nb_games: 'Quantité jeux'
       wallet: 'Portefeuille'
       empty: 'Aucun compte'
+      total_time: 'Temps de jeu total'
     create: 'Créer un compte'
   show:
     title: 'Détails du compte %name%'
+    games: 'Ses jeux'
+    comments: 'Ses commentaires'
   new:
     title: "Création d'un compte"
   edit:

@@ -51,9 +51,15 @@ class Account
      */
     private Collection $libraries;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="account")
+     */
+    private Collection $comments;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->wallet = 0.0;
     }
 
@@ -118,6 +124,29 @@ class Account
     public function removeLibrary(Library $library): self
     {
         $this->libraries->removeElement($library);
+
+        return $this;
+    }
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
 
         return $this;
     }

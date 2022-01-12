@@ -5,7 +5,12 @@ namespace App\Controller;
 use App\Entity\Account;
 use App\Form\AccountType;
 use App\Repository\AccountRepository;
+use App\Repository\CommentRepository;
+use App\Repository\LibraryRepository;
+use App\Service\TimeService;
+use Doctrine\DBAL\Types\TimeType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +23,17 @@ class AccountController extends AbstractController
 {
 
     private EntityManagerInterface $em;
+    private LibraryRepository $libraryRepository;
 
     /**
+     * AccountController constructor.
      * @param EntityManagerInterface $em
+     * @param LibraryRepository $libraryRepository
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, LibraryRepository $libraryRepository)
     {
         $this->em = $em;
+        $this->libraryRepository = $libraryRepository;
     }
 
     /**
@@ -69,13 +78,20 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/{name}", name="account_show")
-     * @param Account $account
+     * @param string $name
+     * @param AccountRepository $accountRepository
+     * @param CommentRepository $commentRepository
+     * @param TimeService $timeService
      * @return Response
+     * @throws NonUniqueResultException
      */
-    public function show(Account $account): Response
+    public function show(string $name, AccountRepository $accountRepository, CommentRepository $commentRepository, TimeService $timeService): Response
     {
+        $account = $accountRepository->findAllByName($name);
         return $this->render('account/show.html.twig', [
             'account' => $account,
+            'comments' => $commentRepository->findCommentsByAccount($account),
+            'totalGameTime' => $timeService->getTimeConverter($this->libraryRepository->getTotalGameTimeByAccount($account)),
         ]);
     }
 

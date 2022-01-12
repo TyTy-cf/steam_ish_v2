@@ -41,7 +41,7 @@ class Comment
     private int $downVotes;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Account::class)
+     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private Account $account;

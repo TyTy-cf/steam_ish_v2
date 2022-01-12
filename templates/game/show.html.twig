@@ -14,12 +14,14 @@
                 <h1 class="text-center">{{ game.name }}</h1>
                 <div>
                     {% for genre in game.genres %}
-                        <span class="game-item">{{ genre.name }}</span>
+                        <a href="{{ path('game_genre', {'slug': genre.slug }) }}" class="text-decoration-none">
+                            <span class="game-item">{{ genre.name }}</span>
+                        </a>
                     {% endfor %}
                 </div>
                 <div class="my-4">
                     {% for country in game.countries %}
-                        <span class="game-item">{{ country.nationality }}</span>
+                        <img src="{{ country.urlFlag }}">
                     {% endfor %}
                 </div>
                 <div class="game-description">
@@ -33,7 +35,7 @@
         <div class="mt-4">
             <div class="row">
                 <h4 class="text-center col-10 offset-1">{{ 'game.show.all_comments'|trans }}</h4>
-                <a class="btn btn-outline-light col-1" href="{{ path('comments_game', {'slug': game.slug}) }}">
+                <a class="btn btn-info col-1" href="{{ path('comments_game', {'slug': game.slug}) }}">
                     {{ 'general.see_all'|trans }}
                 </a>
             </div>

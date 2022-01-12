@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Account;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,26 @@ class AccountRepository extends ServiceEntityRepository
             ->orderBy($order, 'ASC')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * @param string $name
+     * @return Account|null
+     * @throws NonUniqueResultException
+     */
+    public function findAllByName(string $name): ?Account
+    {
+        return $this->createQueryBuilder('account')
+            ->select('account', 'libraries', 'game')
+            ->leftJoin('account.libraries', 'libraries')
+            ->leftJoin('libraries.game', 'game')
+            ->where('account.name = :name')
+            ->setParameter('name', $name)
+            ->orderBy('libraries.installed', 'DESC')
+            ->addOrderBy('game.name', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

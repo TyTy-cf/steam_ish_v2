@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="comment-card-footer">
-                <a href="{{ path('account_show', {'name': comment.account.name}) }}">
+                <a href="{{ path('account_show', {'name': comment.account.name}) }}" class="{% if hideAccount is defined %}d-none{% endif %}">
                     {{ 'home.menu.comment.writted_by'|trans({
                         '%name%': comment.account.name,
                     }) }}
