@@ -1,0 +1,8 @@
+
+account:
+    constraints:
+        min_length: 'Le nom de compte doit faire minimum 4 caractères'
+        unique :
+            email: 'Cet email existe déjà !'
+            name: 'Ce nom existe déjà !'
+        email: "Ce n'est pas un email valide"

@@ -8,8 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class AccountType extends AbstractType
 {
@@ -20,14 +20,20 @@ class AccountType extends AbstractType
                 'label' => 'account.index.table.name',
                 'attr' => [
                     //'class' => 'bg-dark',
-                    'placeholder' => 'account.index.table.name'
+                    'placeholder' => 'account.index.table.name',
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 4,
+                        'minMessage' => 'account.constraints.min_length',
+                    ])
                 ]
             ])
             ->add('email', EmailType::class, [
                 'label' => 'account.index.table.email',
                 'attr' => [
                     'placeholder' => 'account.index.table.email'
-                ]
+                ],
             ])
             ->add('nickname', TextType::class, [
                 'label' => 'account.index.table.nickname',
@@ -52,6 +58,10 @@ class AccountType extends AbstractType
          */
         $resolver->setDefaults([
             'data_class' => Account::class,
+            // Supprime les validations HTML
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ]
         ]);
     }
 }
