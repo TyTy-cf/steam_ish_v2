@@ -67,3 +67,19 @@ Faire le formulaire de création d'un "Publisher" (éditeur de jeu)
 Vous ferez un formulaire qui sera utilisé pour ajouter un Publisher en base de données (route associée) et un moyen de le modifier
 
 Tant qu'à faire... Autant faire un index pour afficher tous les Editeurs de jeux qui existent dans notre base de données
+
+
+## Exercices - Validators form
+
+
+Faire des validators partout !
+
+
+Ajouter une contrainte unique sur les Entités :
+- Country : attribut name et code
+- Game : name
+- Genre : name
+- Publisher : name
+
+Libre à vous pour les validations restantes... Soyez inventifs !
+
