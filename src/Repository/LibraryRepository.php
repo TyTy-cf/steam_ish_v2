@@ -6,7 +6,6 @@ use App\Entity\Account;
 use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use phpDocumentor\Reflection\Types\Mixed_;
 
 /**
  * @method Library|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,7 +22,7 @@ class LibraryRepository extends ServiceEntityRepository
 
     /**
      * @param Account $account
-     * @return string
+     * @return int
      */
     public function getTotalGameTimeByAccount(Account $account): int {
         $qb = $this->createQueryBuilder('l')
