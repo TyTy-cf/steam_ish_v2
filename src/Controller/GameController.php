@@ -54,9 +54,9 @@ class GameController extends AbstractController
      * @throws NonUniqueResultException
      */
     public function gameRedirect(string $slug): Response {
-        if (null != $this->gameRepository->findGameBySlug($slug)) {
+        if (null != $game = $this->gameRepository->findGameBySlug($slug)) {
             return $this->forward(GameController::class . '::show', [
-                'slug' => $slug,
+                'game' => $game,
             ]);
         }
         return $this->forward(GameController::class . '::genre', [
@@ -65,14 +65,11 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="game_show")
-     * @param string $slug
+     * @param Game $game
      * @return Response
-     * @throws NonUniqueResultException
      */
-    public function show(string $slug): Response
+    public function show(Game $game): Response
     {
-        $game = $this->gameRepository->findGameBySlug($slug);
         return $this->render('game/show.html.twig', [
             'game' => $game,
             'relatedGames' => $this->gameRepository->findRelatedGameByGenres($game->getGenres()),

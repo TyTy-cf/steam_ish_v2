@@ -8,9 +8,11 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PublisherRepository::class)
+ * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
  * @ApiResource()
  */
 class Publisher
@@ -22,10 +24,7 @@ class Publisher
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
+    use TraitSlug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -61,18 +60,6 @@ class Publisher
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**

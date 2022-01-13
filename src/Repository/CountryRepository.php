@@ -19,32 +19,20 @@ class CountryRepository extends ServiceEntityRepository
         parent::__construct($registry, Country::class);
     }
 
-    // /**
-    //  * @return Language[] Returns an array of Language objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Requête pour récupérer tous les pays de la base de données, triés sur le paramètre '$field' et avec l'order en paramètre
+     *
+     * @param string $field
+     * @param string $order
+     * @return array
+     */
+    public function findAllOrderBy(string $field = 'name', string $order = 'ASC'): array
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy([], [$field => $order]);
+//        return $this->createQueryBuilder('country')
+//            ->orderBy($field, $order)
+//            ->getQuery()
+//            ->getResult()
+//        ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Language
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

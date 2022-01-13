@@ -26,7 +26,7 @@
                         <td>{{ country.nationality }}</td>
                         <td>{{ country.code }}</td>
                         <td>
-                            {% if country.urlFlag is not null %}
+                            {% if country.urlFlag is defined %}
                                 <img src="{{ country.urlFlag }}" alt="{{ 'country.index.flag_alt'|trans({'%country%': country.name}) }}">
                             {% endif %}
                         </td>
@@ -34,9 +34,6 @@
                             <a class="logo-link" href="{{ path('country_edit', {'id': country.id}) }}">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-{#                            <a class="logo-link" href="{{ path('genre_show', {'slug': genre.slug}) }}">#}
-{#                                <i class="far fa-eye"></i>#}
-{#                            </a>#}
                         </td>
                     </tr>
                 {% endfor %}

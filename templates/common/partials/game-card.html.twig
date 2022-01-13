@@ -7,7 +7,7 @@
             </p>
         </a>
     {% endif %}
-    <a href="{{ path('game_show', {'slug': game.slug}) }}" class="{{ classCss }} text-decoration-none">
+    <a href="{{ path('game_redirect', {'slug': game.slug}) }}" class="{{ classCss }} text-decoration-none">
         <div class="card-game">
             <div class="{{ containerImage }}">
                 <img class="img-100" src="{{ game.thumbnailCover }}">

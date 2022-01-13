@@ -44,7 +44,7 @@ class CountryController extends AbstractController
     public function index(): Response
     {
         return $this->render('country/index.html.twig', [
-            'countries' => $this->countryRepository->findAll(),
+            'countries' => $this->countryRepository->findAllOrderBy(),
         ]);
     }
 
@@ -63,6 +63,9 @@ class CountryController extends AbstractController
      * @param Request $request
      * @param Country $country
      * @return Response
+     *
+     * => $countryRepository->findOneBy(['id' => $request->get('id')]);
+     *
      */
     public function edit(Request $request, Country $country): Response
     {
@@ -83,7 +86,7 @@ class CountryController extends AbstractController
             $country->setCode(strtolower($country->getCode()));
             $country->setSlug($this->textService->slugify($country->getName()));
             $country->setUrlFlag('https://flagcdn.com/32x24/'.$country->getCode().'.png');
-            $this->em->persist($country);
+            $this->em->persist($country); // préparer les requêtes pour la BDD => INSERT ou UPDATE
             $this->em->flush();
             return $this->redirectToRoute('country_index');
         }
