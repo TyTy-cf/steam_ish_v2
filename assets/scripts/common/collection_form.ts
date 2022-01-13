@@ -6,8 +6,8 @@ window.addEventListener('load', function () {
             btnElt.addEventListener('click', () => {
                 const dataValueSelector: string = btnElt.getAttribute('data-btn-selector');
                 let list: HTMLElement = document.querySelector('[data-list-selector="'+dataValueSelector+'"]');
-                let counter = list.children.length;
-                let newWidget = list.getAttribute('data-prototype');
+                let counter: number = list.children.length;
+                let newWidget: string = list.getAttribute('data-prototype');
                 newWidget = newWidget.replace(/__name__/g, counter.toString());
                 counter++;
                 list.setAttribute('widget-counter', counter.toString());
@@ -18,3 +18,5 @@ window.addEventListener('load', function () {
         });
     }
 });
+
+

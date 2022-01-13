@@ -27,7 +27,11 @@ class GameController extends AbstractController
      * @param GenreRepository $genreRepository
      * @param CommentRepository $commentRepository
      */
-    public function __construct(GameRepository $gameRepository, GenreRepository $genreRepository, CommentRepository $commentRepository)
+    public function __construct(
+        GameRepository $gameRepository,
+        GenreRepository $genreRepository,
+        CommentRepository $commentRepository
+    )
     {
         $this->gameRepository = $gameRepository;
         $this->genreRepository = $genreRepository;

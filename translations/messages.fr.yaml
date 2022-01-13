@@ -41,6 +41,20 @@ game:
     related_games: 'Les jeux similaires'
   comment:
     details: 'Les commentaires de %game%'
+  form:
+    published_at: 'Date de sortie'
+    price: 'Prix'
+    description: 'Description'
+    thumbnailCover: 'Image de couverture'
+    thumbnailLogo: 'Logo du jeu'
+    name: 'Nom'
+    publisher: 'Editeur'
+    countries: 'Langues'
+    add_country: 'Ajouter pays'
+    genres: 'Genres'
+    add_genre: 'Ajouter genre'
+  new:
+    title: 'Ajouter un jeu'
 general:
   see_all: 'Voir tout'
   button:
