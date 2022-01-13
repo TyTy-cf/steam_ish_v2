@@ -79,3 +79,18 @@ country:
     title: "Ajout d'un pays"
   edit:
     title: "Modification d'un pays"
+publisher:
+  index:
+    title: 'Les éditeurs'
+    create: 'Ajouter un éditeur'
+    table:
+      name: 'Nom'
+      directorName: 'Directeur'
+      created_at: 'Date de création'
+      website: 'Site Web'
+      nationality: 'Nationalité'
+      empty: "Pas d'éditeur"
+  new:
+    title: "Ajout d'un éditeur"
+  edit:
+    title: "Modifier un éditeur"

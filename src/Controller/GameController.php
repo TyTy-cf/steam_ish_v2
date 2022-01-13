@@ -49,6 +49,7 @@ class GameController extends AbstractController
 
     /**
      * @Route("/{slug}", name="game_redirect")
+     * @Route("forum/{slugCateg}/{slugSubCateg}", name="forum_game_categ")
      * @param string $slug
      * @return Response
      * @throws NonUniqueResultException

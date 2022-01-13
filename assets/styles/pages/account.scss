@@ -5,6 +5,12 @@
   &:hover {
     color: $default-background-color-l30;
   }
+
+  &.red {
+    &:hover {
+      color: $default-red;
+    }
+  }
 }
 
 .card-price {
