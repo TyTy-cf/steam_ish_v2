@@ -13,7 +13,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=GameRepository::class)
  * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- * @ApiResource()
  */
 class Game
 {

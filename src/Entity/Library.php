@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=LibraryRepository::class)
- * @ApiResource()
  */
 class Library
 {

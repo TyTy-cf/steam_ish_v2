@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Repository\AccountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,7 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=AccountRepository::class)
  * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
  * @UniqueEntity(fields={"email"}, message="account.constraints.unique.email")
- * @ApiResource()
  */
 class Account
 {
@@ -31,7 +27,6 @@ class Account
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @ApiFilter(OrderFilter::class)
      * @Assert\Email(message="account.constraints.email")
      */
     private string $email;

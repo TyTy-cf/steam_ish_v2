@@ -13,7 +13,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=PublisherRepository::class)
  * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- * @ApiResource()
  */
 class Publisher
 {

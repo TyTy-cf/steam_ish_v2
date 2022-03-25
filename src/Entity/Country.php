@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=CountryRepository::class)
  * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- * @ApiResource()
  */
 class Country
 {
