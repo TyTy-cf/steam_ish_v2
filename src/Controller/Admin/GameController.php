@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Game;
 use App\Form\GameFormType;
@@ -13,17 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/game")
- *
  * Class AdminGameController
  * @package App\Controller
  */
-class AdminGameController extends AbstractController
+#[Route('/admin/game')]
+class GameController extends AbstractController
 {
-
-    private GameRepository $gameRepository;
-    private EntityManagerInterface $em;
-    private TextService $textService;
 
     /**
      * AdminGameController constructor.
@@ -31,28 +26,24 @@ class AdminGameController extends AbstractController
      * @param EntityManagerInterface $em
      * @param TextService $textService
      */
-    public function __construct(GameRepository $gameRepository, EntityManagerInterface $em, TextService $textService)
-    {
-        $this->gameRepository = $gameRepository;
-        $this->em = $em;
-        $this->textService = $textService;
-    }
+    public function __construct(
+        private GameRepository $gameRepository,
+        private EntityManagerInterface $em,
+        private TextService $textService
+    ) { }
 
-    /**
-     * @Route("/", name="admin_game_index")
-     */
+    #[Route('/', name: "admin_game_index")]
     public function index(): Response
     {
         return $this->render('admin_game/index.html.twig', [
-            'controller_name' => 'AdminGameController',
         ]);
     }
 
     /**
-     * @Route("/new", name="admin_game_new")
      * @param Request $request
      * @return Response
      */
+    #[Route('/new', name: "admin_game_new")]
     public function new(Request $request): Response
     {
         return $this->createFormFromEntity($request, new Game());
