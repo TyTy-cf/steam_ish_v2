@@ -37,7 +37,7 @@ class CommentController extends AbstractController
             $this->em->flush();
             return $this->redirectToRoute('game_index');
         }
-        return $this->render('comment/new.html.twig',[
+        return $this->render('Front/comment/new.html.twig',[
             'form' => $form->createView(),
         ]);
     }

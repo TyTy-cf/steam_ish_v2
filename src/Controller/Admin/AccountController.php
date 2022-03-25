@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Front;
+namespace App\Controller\Admin;
 
 use App\Entity\Account;
 use App\Form\AccountType;
@@ -32,7 +32,7 @@ class AccountController extends AbstractController
     #[Route('/', name: "account_index")]
     public function index(AccountRepository $accountRepository): Response
     {
-        return $this->render('account/index.html.twig', [
+        return $this->render('Admin/account/index.html.twig', [
             'accounts' => $accountRepository->findAllWithRelations(),
         ]);
     }
@@ -60,7 +60,7 @@ class AccountController extends AbstractController
             $this->em->flush();
             return $this->redirectToRoute('account_index');
         }
-        return $this->render('account/new.html.twig',[
+        return $this->render('Admin/account/new.html.twig',[
             'form' => $form->createView(),
         ]);
     }
@@ -81,7 +81,7 @@ class AccountController extends AbstractController
         TimeService $timeService
     ): Response {
         $account = $accountRepository->findAllByName($name);
-        return $this->render('account/show.html.twig', [
+        return $this->render('Admin/account/show.html.twig', [
             'account' => $account,
             'comments' => $commentRepository->findCommentsByAccount($account),
             'totalGameTime' => $timeService->getTimeConverter($this->libraryRepository->getTotalGameTimeByAccount($account)),
@@ -102,7 +102,7 @@ class AccountController extends AbstractController
             $this->em->flush();
             return $this->redirectToRoute('account_index');
         }
-        return $this->render('account/edit.html.twig',[
+        return $this->render('Admin/account/edit.html.twig',[
             'form' => $form->createView(),
         ]);
     }

@@ -31,7 +31,7 @@ class PublisherController extends AbstractController
     #[Route('/', name: "publisher_index")]
     public function index(): Response
     {
-        return $this->render('publisher/index.html.twig', [
+        return $this->render('Admin/publisher/index.html.twig', [
             'publishers' => $this->publisherRepository->findAllRelations(),
         ]);
     }
@@ -56,7 +56,7 @@ class PublisherController extends AbstractController
     #[Route('/edit/{slug}', name: "publisher_edit")]
     public function edit(Request $request, Publisher $publisher): Response
     {
-        return $this->createFormFromEntity($request, $publisher, 'publisher/edit.html.twig');
+        return $this->createFormFromEntity($request, $publisher, 'Admin/publisher/edit.html.twig');
     }
 
     /**
@@ -65,7 +65,7 @@ class PublisherController extends AbstractController
      * @param string $template
      * @return Response
      */
-    private function createFormFromEntity(Request $request, Publisher $publisher, string $template = 'publisher/new.html.twig'): Response
+    private function createFormFromEntity(Request $request, Publisher $publisher, string $template = 'Admin/publisher/new.html.twig'): Response
     {
         $form = $this->createForm(PublisherFormType::class, $publisher);
         $form->handleRequest($request);

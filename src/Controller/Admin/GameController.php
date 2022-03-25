@@ -35,7 +35,7 @@ class GameController extends AbstractController
     #[Route('/', name: "admin_game_index")]
     public function index(): Response
     {
-        return $this->render('admin_game/index.html.twig', [
+        return $this->render('Admin/game/index.html.twig', [
         ]);
     }
 
@@ -55,7 +55,7 @@ class GameController extends AbstractController
      * @param string $template
      * @return Response
      */
-    private function createFormFromEntity(Request $request, Game $game, string $template = 'game/admin/new.html.twig'): Response
+    private function createFormFromEntity(Request $request, Game $game, string $template = 'Admin/game/new.html.twig'): Response
     {
         $form = $this->createForm(GameFormType::class, $game);
         $form->handleRequest($request);
