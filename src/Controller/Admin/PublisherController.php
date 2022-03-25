@@ -70,7 +70,6 @@ class PublisherController extends AbstractController
         $form = $this->createForm(PublisherFormType::class, $publisher);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $publisher->setSlug($this->textService->slugify($publisher->getName()));
             $this->em->persist($publisher); // préparer les requêtes pour la BDD => INSERT ou UPDATE
             $this->em->flush();
             return $this->redirectToRoute('publisher_index');

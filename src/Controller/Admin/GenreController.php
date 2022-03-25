@@ -80,7 +80,6 @@ class GenreController extends AbstractController
         $form = $this->createForm(GenreFormType::class, $genre);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $genre->setSlug($this->textService->slugify($genre->getName()));
             $this->em->persist($genre);
             $this->em->flush();
             return $this->redirectToRoute('genre_index');

@@ -76,8 +76,6 @@ class CountryController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $country->setCode(strtolower($country->getCode()));
-            $country->setSlug($this->textService->slugify($country->getName()));
-            $country->setUrlFlag('https://flagcdn.com/32x24/'.$country->getCode().'.png');
             $this->em->persist($country); // préparer les requêtes pour la BDD => INSERT ou UPDATE
             $this->em->flush();
             return $this->redirectToRoute('country_index');

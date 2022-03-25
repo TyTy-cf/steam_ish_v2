@@ -60,7 +60,6 @@ class GameController extends AbstractController
         $form = $this->createForm(GameFormType::class, $game);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $game->setSlug($this->textService->slugify($game->getName()));
             $this->em->persist($game); // préparer les requêtes pour la BDD => INSERT ou UPDATE
             $this->em->flush();
             return $this->redirectToRoute('admin_game_index');
