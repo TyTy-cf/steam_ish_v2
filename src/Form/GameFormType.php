@@ -7,6 +7,7 @@ use App\Entity\Game;
 use App\Entity\Genre;
 use App\Entity\Publisher;
 use Doctrine\ORM\EntityRepository;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -28,7 +29,7 @@ class GameFormType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'game.form.name',
             ])
-            ->add('description', TextareaType::class, [
+            ->add('description', CKEditorType::class, [
                 'label' => 'game.form.description',
             ])
             ->add('publishedAt',DateType::class, [

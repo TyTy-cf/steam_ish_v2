@@ -1,0 +1,28 @@
+
+<div class="container col-6 mt-1 mx-auto">
+    <h1>{{ 'game.new.title'|trans }}</h1>
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="form-group col-lg-12">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-12">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-6">
+                {{ form_label(form.publishedAt) }}
+                {{ form_widget(form.publishedAt) }}
+            </div>
+            <div class="form-group col-lg-6">
+                {{ form_label(form.price) }}
+                {{ form_widget(form.price) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+</div>
