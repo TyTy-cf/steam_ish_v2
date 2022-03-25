@@ -22,7 +22,7 @@ class HomeController extends AbstractController
         CommentRepository $commentRepository
     ): Response
     {
-        return $this->render('home/index.html.twig', [
+        return $this->render('Common/home/index.html.twig', [
             'alphaGames' => $gameRepository->findLastGames(10, true),
             'lastPublishedGames' => $gameRepository->findLastGames(4),
             'lastComments' => $commentRepository->findCommentsByLimit(4),

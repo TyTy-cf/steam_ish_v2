@@ -31,7 +31,7 @@ class GenreController extends AbstractController
 
     #[Route('/', name: "genre_index")]
     public function index(): Response {
-        return $this->render('genre/index.html.twig',[
+        return $this->render('Admin/genre/index.html.twig',[
             'genres' => $this->genreRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class GenreController extends AbstractController
      */
     #[Route('/new', name: "genre_create")]
     public function new(Request $request): Response {
-        return $this->createFormFromEntity($request, new Genre(), 'genre/new.html.twig');
+        return $this->createFormFromEntity($request, new Genre(), 'Admin/genre/new.html.twig');
     }
 
     /**
@@ -54,7 +54,7 @@ class GenreController extends AbstractController
     #[Route('/{slug}', name: "genre_show")]
     public function show(CommentRepository $commentRepository, string $slug): Response {
         $genre = $this->genreRepository->findWithRelations($slug);
-        return $this->render('genre/show.html.twig',[
+        return $this->render('Front/genre/show.html.twig',[
             'genre' => $genre,
             'lastComments' => $commentRepository->findByGenre($genre, 8),
         ]);
@@ -67,7 +67,7 @@ class GenreController extends AbstractController
      */
     #[Route('/edit/{slug}', name: "genre_edit")]
     public function edit(Request $request, Genre $genre): Response {
-        return $this->createFormFromEntity($request, $genre, 'genre/edit.html.twig');
+        return $this->createFormFromEntity($request, $genre, 'Admin/genre/edit.html.twig');
     }
 
     /**

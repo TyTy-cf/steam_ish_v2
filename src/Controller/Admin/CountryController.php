@@ -35,7 +35,7 @@ class CountryController extends AbstractController
     #[Route('/', name: "country_index")]
     public function index(): Response
     {
-        return $this->render('country/index.html.twig', [
+        return $this->render('Admin/country/index.html.twig', [
             'countries' => $this->countryRepository->findAllOrderBy(),
         ]);
     }
@@ -70,7 +70,7 @@ class CountryController extends AbstractController
      * @param string $template
      * @return Response
      */
-    private function createFormFromEntity(Request $request, Country $country, string $template = 'country/new.html.twig'): Response
+    private function createFormFromEntity(Request $request, Country $country, string $template = 'Admin/country/new.html.twig'): Response
     {
         $form = $this->createForm(CountryFormType::class, $country);
         $form->handleRequest($request);

@@ -34,7 +34,7 @@ class GameController extends AbstractController
     #[Route('/', name: "game_index")]
     public function index(): Response
     {
-        return $this->render('game/index.html.twig', [
+        return $this->render('Front/game/index.html.twig', [
             'games' => $this->gameRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
@@ -63,7 +63,7 @@ class GameController extends AbstractController
      */
     public function show(Game $game): Response
     {
-        return $this->render('game/show.html.twig', [
+        return $this->render('Front/game/show.html.twig', [
             'game' => $game,
             'relatedGames' => $this->gameRepository->findRelatedGameByGenres($game->getGenres()),
         ]);
@@ -78,7 +78,7 @@ class GameController extends AbstractController
     public function genre(string $slug): Response
     {
         $genre = $this->genreRepository->findWithRelations($slug);
-        return $this->render('genre/show.html.twig',[
+        return $this->render('Front/genre/show.html.twig',[
             'genre' => $genre,
             'lastComments' => $this->commentRepository->findByGenre($genre, 8),
         ]);
@@ -92,7 +92,7 @@ class GameController extends AbstractController
     #[Route('/{slug}/comments', name: "comments_game")]
     public function gameComments(string $slug): Response
     {
-        return $this->render('comment/index.html.twig', [
+        return $this->render('Front/comment/index.html.twig', [
             'game' => $this->gameRepository->findGameBySlug($slug),
         ]);
     }
