@@ -6,14 +6,14 @@ use App\Repository\CommentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampMethodsTrait;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment implements CreatedTimestampInterface
 {
 
-    use CreatedTimestampTrait;
+    use CreatedTimestampMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Comment'])]
@@ -30,6 +30,10 @@ class Comment implements CreatedTimestampInterface
     #[ORM\Column(type: 'integer')]
     #[Groups(['Comment'])]
     private int $downVotes;
+
+    #[ORM\Column(type: 'datetime')]
+    #[Groups(['Account'])]
+    protected DateTime $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]

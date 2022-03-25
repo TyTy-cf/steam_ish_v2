@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\AccountRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
-use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugMethodsTrait;
 use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampMethodsTrait;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -20,8 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Account implements SlugInterface, CreatedTimestampInterface
 {
 
-    use CreatedTimestampTrait;
-    use SlugTrait;
+    use CreatedTimestampMethodsTrait;
+    use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue(strategy: 'CUSTOM'), ORM\CustomIdGenerator(class: UuidGenerator::class), ORM\Column(type: 'string', length: 36)]
     #[Groups(['Account'])]
@@ -51,11 +52,13 @@ class Account implements SlugInterface, CreatedTimestampInterface
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
     private Collection $comments;
 
-//    #[Groups(['Account'])]
-//    protected $slug = '';
-//
-//    #[Groups(['Account'])]
-//    protected $createdAt = '';
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Groups(['Account'])]
+    private string $slug = '';
+
+    #[ORM\Column(type: 'datetime')]
+    #[Groups(['Account'])]
+    protected DateTime $createdAt;
 
     public function __construct()
     {

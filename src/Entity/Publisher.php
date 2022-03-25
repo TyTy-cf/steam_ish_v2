@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\PublisherRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
-use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugMethodsTrait;
 use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
-use JetBrains\PhpStorm\Pure;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampMethodsTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -19,8 +19,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Publisher implements SlugInterface, CreatedTimestampInterface
 {
 
-    use SlugTrait;
-    use CreatedTimestampTrait;
+    use CreatedTimestampMethodsTrait;
+    use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Publisher'])]
@@ -42,7 +42,15 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
     #[Groups(['Publisher'])]
     private Collection $games;
 
-    #[Pure] public function __construct()
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Groups(['Account'])]
+    private string $slug = '';
+
+    #[ORM\Column(type: 'datetime')]
+    #[Groups(['Account'])]
+    protected DateTime $createdAt;
+
+    public function __construct()
     {
         $this->games = new ArrayCollection();
     }

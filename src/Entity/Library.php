@@ -3,16 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\LibraryRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampMethodsTrait;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LibraryRepository::class)]
 class Library implements CreatedTimestampInterface
 {
 
-    use CreatedTimestampTrait;
+    use CreatedTimestampMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Library'])]
@@ -29,6 +30,10 @@ class Library implements CreatedTimestampInterface
     #[ORM\Column(type: 'datetime')]
     #[Groups(['Game'])]
     private float $lastUsedAt;
+
+    #[ORM\Column(type: 'datetime')]
+    #[Groups(['Account'])]
+    protected DateTime $createdAt;
 
     /**
      * Dans une relation (ManyToOne OU ManyToMany) s'il n'y a pas d'inversedBy, alors :

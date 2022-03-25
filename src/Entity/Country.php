@@ -7,8 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
-use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
-use JetBrains\PhpStorm\Pure;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugMethodsTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -17,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Country implements SlugInterface
 {
 
-    use SlugTrait;
+    use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Country'])]
@@ -39,11 +38,15 @@ class Country implements SlugInterface
     #[Groups(['Country'])]
     private string $code;
 
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Groups(['Account'])]
+    private string $slug = '';
+
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'countries')]
     #[Groups(['Comment'])]
     private Collection $games;
 
-    #[Pure] public function __construct()
+    public function __construct()
     {
         $this->games = new ArrayCollection();
     }
