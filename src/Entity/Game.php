@@ -3,25 +3,21 @@
 namespace App\Entity;
 
 use App\Repository\GameRepository;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
 use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[UniqueEntity(fields: 'name', message: 'account.constraints.unique.name')]
 #[ORM\Entity(repositoryClass: GameRepository::class)]
-class Game implements CreatedTimestampInterface, SlugInterface
+class Game implements  SlugInterface
 {
 
     use SlugTrait;
-    use CreatedTimestampTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Game'])]
@@ -34,6 +30,10 @@ class Game implements CreatedTimestampInterface, SlugInterface
     #[ORM\Column(type: 'float')]
     #[Groups(['Game'])]
     private float $price;
+
+    #[ORM\Column(type: 'datetime')]
+    #[Groups(['Game'])]
+    private float $publishedAt;
 
     #[ORM\Column(type: 'text')]
     #[Groups(['Game'])]
@@ -207,18 +207,6 @@ class Game implements CreatedTimestampInterface, SlugInterface
         return $this;
     }
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
     public function getPublisher(): Publisher
     {
         return $this->publisher;
@@ -228,6 +216,24 @@ class Game implements CreatedTimestampInterface, SlugInterface
     {
         $this->publisher = $publisher;
 
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPublishedAt(): float
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * @param float $publishedAt
+     * @return Game
+     */
+    public function setPublishedAt(float $publishedAt): Game
+    {
+        $this->publishedAt = $publishedAt;
         return $this;
     }
 

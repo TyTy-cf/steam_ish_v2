@@ -19,4 +19,5 @@ return [
     Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Drosalys\Bundle\ApiBundle\DrosalysApiBundle::class => ['all' => true],
+    DrosalysWeb\ObjectExtensions\Bridge\Symfony\DrosalysWebObjectExtensionsBundle::class => ['all' => true],
 ];

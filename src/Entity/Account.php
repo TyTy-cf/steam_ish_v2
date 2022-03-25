@@ -10,7 +10,6 @@ use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
 use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
 use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
 use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
-use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -52,7 +51,13 @@ class Account implements SlugInterface, CreatedTimestampInterface
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
     private Collection $comments;
 
-    #[Pure] public function __construct()
+//    #[Groups(['Account'])]
+//    protected $slug = '';
+//
+//    #[Groups(['Account'])]
+//    protected $createdAt = '';
+
+    public function __construct()
     {
         $this->libraries = new ArrayCollection();
         $this->comments = new ArrayCollection();

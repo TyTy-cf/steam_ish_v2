@@ -1,0 +1,3 @@
+drosalys_api:
+    tag_namespaces:
+        - 'App\Controller\Api'

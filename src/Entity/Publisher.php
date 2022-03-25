@@ -32,10 +32,6 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
 
     #[ORM\Column(type: 'string', length: '180')]
     #[Groups(['Publisher'])]
-    private string $directorName;
-
-    #[ORM\Column(type: 'string', length: '180')]
-    #[Groups(['Publisher'])]
     private string $website;
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
@@ -70,22 +66,6 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
     public function setWebsite(string $website): void
     {
         $this->website = $website;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDirectorName(): string
-    {
-        return $this->directorName;
-    }
-
-    /**
-     * @param string $directorName
-     */
-    public function setDirectorName(string $directorName): void
-    {
-        $this->directorName = $directorName;
     }
 
     public function getCountry(): Country

@@ -16,7 +16,6 @@
             <thead>
             <tr>
                 <th>{{ 'publisher.index.table.name'|trans }}</th>
-                <th>{{ 'publisher.index.table.directorName'|trans }}</th>
                 <th>{{ 'publisher.index.table.created_at'|trans }}</th>
                 <th>{{ 'publisher.index.table.nationality'|trans }}</th>
                 <th></th>
@@ -27,7 +26,6 @@
                 {% for publisher in publishers %}
                     <tr>
                         <td>{{ publisher.name }}</td>
-                        <td>{{ publisher.directorName }}</td>
                         <td>{{ publisher.createdAt|date('d/m/Y') }}</td>
                         <td>
                             {% if publisher.country.urlFlag is defined %}

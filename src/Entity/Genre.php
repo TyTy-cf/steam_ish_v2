@@ -23,6 +23,10 @@ class Genre implements SlugInterface
     #[Groups(['Genre'])]
     private int $id;
 
+    #[ORM\Column(type: 'string', length: '128')]
+    #[Groups(['Country'])]
+    private string $name;
+
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'genres')]
     #[Groups(['Genre'])]
     private Collection $games;
@@ -35,6 +39,24 @@ class Genre implements SlugInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Genre
+     */
+    public function setName(string $name): Genre
+    {
+        $this->name = $name;
+        return $this;
     }
 
     /**

@@ -4,15 +4,15 @@ namespace App\Entity;
 
 use App\Repository\LibraryRepository;
 use Doctrine\ORM\Mapping as ORM;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\TimestampInterface;
-use DrosalysWeb\ObjectExtensions\Timestamp\Model\TimestampTrait;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LibraryRepository::class)]
-class Library implements TimestampInterface
+class Library implements CreatedTimestampInterface
 {
 
-    use TimestampTrait;
+    use CreatedTimestampTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Library'])]
@@ -25,6 +25,10 @@ class Library implements TimestampInterface
     #[ORM\Column(type: 'integer', options: ['default' => 0])]
     #[Groups(['Library'])]
     private int $gameTime;
+
+    #[ORM\Column(type: 'datetime')]
+    #[Groups(['Game'])]
+    private float $lastUsedAt;
 
     /**
      * Dans une relation (ManyToOne OU ManyToMany) s'il n'y a pas d'inversedBy, alors :
@@ -101,6 +105,24 @@ class Library implements TimestampInterface
     {
         $this->account = $account;
 
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLastUsedAt(): float
+    {
+        return $this->lastUsedAt;
+    }
+
+    /**
+     * @param float $lastUsedAt
+     * @return Library
+     */
+    public function setLastUsedAt(float $lastUsedAt): Library
+    {
+        $this->lastUsedAt = $lastUsedAt;
         return $this;
     }
 
