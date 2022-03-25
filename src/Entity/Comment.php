@@ -5,49 +5,40 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=CommentRepository::class)
- */
-class Comment
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
+class Comment implements CreatedTimestampInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    use CreatedTimestampTrait;
+
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['Comment'])]
     private int $id;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private DateTime $createdAt;
-
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
+    #[Groups(['Comment'])]
     private string $content;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['Comment'])]
     private int $upVotes;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['Comment'])]
     private int $downVotes;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Comment'])]
     private Account $account;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Comment'])]
     private Game $game;
 
     public function __construct()
@@ -66,7 +57,7 @@ class Comment
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt): self
+    public function setCreatedAt(DateTime|null $createdAt): self
     {
         $this->createdAt = $createdAt;
 

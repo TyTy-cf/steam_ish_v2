@@ -2,75 +2,68 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GameRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=GameRepository::class)
- * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- */
-class Game
+#[UniqueEntity(fields: 'name', message: 'account.constraints.unique.name')]
+#[ORM\Entity(repositoryClass: GameRepository::class)]
+class Game implements CreatedTimestampInterface, SlugInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    use SlugTrait;
+    use CreatedTimestampTrait;
+
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['Game'])]
     private int $id;
 
-    use TraitSlug;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['Game'])]
+    private ?string $name;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $publishedAt;
-
-    /**
-     * @ORM\Column(type="float")
-     */
+    #[ORM\Column(type: 'float')]
+    #[Groups(['Game'])]
     private float $price;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
+    #[Groups(['Game'])]
     private string $description;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['Game'])]
     private ?string $thumbnailCover;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['Game'])]
     private ?string $thumbnailLogo;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Country::class, inversedBy="games")
-     */
+    #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'games')]
+    #[Groups(['Game'])]
     private Collection $countries;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="games")
-     */
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'games')]
+    #[Groups(['Game'])]
     private Collection $genres;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="game")
-     */
+    #[ORM\OneToMany(mappedBy: 'game', targetEntity: Comment::class)]
+    #[Groups(['Game'])]
     private Collection $comments;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Publisher::class, inversedBy="games")
-     */
+    #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'games')]
+    #[Groups(['Game'])]
     private Publisher $publisher;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->countries = new ArrayCollection();
         $this->genres = new ArrayCollection();
@@ -90,18 +83,6 @@ class Game
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getPublishedAt(): DateTime
-    {
-        return $this->publishedAt;
-    }
-
-    public function setPublishedAt(DateTime $publishedAt): self
-    {
-        $this->publishedAt = $publishedAt;
 
         return $this;
     }
@@ -155,7 +136,7 @@ class Game
     }
 
     /**
-     * @return Collection|Country[]
+     * @return Collection
      */
     public function getCountries(): Collection
     {
@@ -179,7 +160,7 @@ class Game
     }
 
     /**
-     * @return Collection|Genre[]
+     * @return Collection
      */
     public function getGenres(): Collection
     {
@@ -203,7 +184,7 @@ class Game
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection
      */
     public function getComments(): Collection
     {
@@ -248,6 +229,13 @@ class Game
         $this->publisher = $publisher;
 
         return $this;
+    }
+
+    public static function getSlugFields(): array
+    {
+        return [
+            'name',
+        ];
     }
 
 }

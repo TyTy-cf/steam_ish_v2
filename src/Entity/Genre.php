@@ -3,33 +3,31 @@
 namespace App\Entity;
 
 use App\Repository\GenreRepository;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=GenreRepository::class)
- * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- */
-class Genre
+#[UniqueEntity(fields: 'name', message: 'account.constraints.unique.name')]
+#[ORM\Entity(repositoryClass: GenreRepository::class)]
+class Genre implements SlugInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    use SlugTrait;
+
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['Genre'])]
     private int $id;
 
-    use TraitSlug;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="genres")
-     */
+    #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'genres')]
+    #[Groups(['Genre'])]
     private Collection $games;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->games = new ArrayCollection();
     }
@@ -40,7 +38,7 @@ class Genre
     }
 
     /**
-     * @return Collection|Game[]
+     * @return Collection
      */
     public function getGames(): Collection
     {
@@ -64,5 +62,12 @@ class Genre
         }
 
         return $this;
+    }
+
+    public static function getSlugFields(): array
+    {
+        return [
+            'name',
+        ];
     }
 }

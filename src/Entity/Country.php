@@ -2,49 +2,48 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=CountryRepository::class)
- * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- */
-class Country
+#[UniqueEntity(fields: 'name'), UniqueEntity(fields: 'code')]
+#[ORM\Entity(repositoryClass: CountryRepository::class)]
+class Country implements SlugInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    use SlugTrait;
+
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['Country'])]
     private int $id;
 
-    use TraitSlug;
+    #[ORM\Column(type: 'string', length: '128')]
+    #[Groups(['Country'])]
+    private string $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: '128')]
+    #[Groups(['Country'])]
     private string $nationality;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: '255', nullable: true)]
+    #[Groups(['Country'])]
     private ?string $urlFlag;
 
-    /**
-     * @ORM\Column(type="string", length=6)
-     */
+    #[ORM\Column(type: 'string', length: '2')]
+    #[Groups(['Country'])]
     private string $code;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="countries")
-     */
+    #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'countries')]
+    #[Groups(['Comment'])]
     private Collection $games;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->games = new ArrayCollection();
     }
@@ -52,6 +51,24 @@ class Country
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Country
+     */
+    public function setName(string $name): Country
+    {
+        $this->name = $name;
+        return $this;
     }
 
     public function getUrlFlag(): ?string
@@ -83,7 +100,7 @@ class Country
     }
 
     /**
-     * @return Collection|Game[]
+     * @return Collection
      */
     public function getGames(): Collection
     {
@@ -119,5 +136,12 @@ class Country
         $this->code = $code;
 
         return $this;
+    }
+
+    public static function getSlugFields(): array
+    {
+        return [
+            'nationality',
+        ];
     }
 }

@@ -2,56 +2,51 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PublisherRepository;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=PublisherRepository::class)
- * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- */
-class Publisher
+#[UniqueEntity(fields: 'name', message: 'account.constraints.unique.name')]
+#[ORM\Entity(repositoryClass: PublisherRepository::class)]
+class Publisher implements SlugInterface, CreatedTimestampInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
-    use TraitSlug;
+    use SlugTrait;
+    use CreatedTimestampTrait;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['Publisher'])]
+    private ?int $id;
+
+    #[ORM\Column(type: 'string', length: '180')]
+    #[Groups(['Publisher'])]
+    private string $name;
+
+    #[ORM\Column(type: 'string', length: '180')]
+    #[Groups(['Publisher'])]
     private string $directorName;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: '180')]
+    #[Groups(['Publisher'])]
     private string $website;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private DateTime $createdAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Country::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Country::class)]
+    #[Groups(['Publisher'])]
     private Country $country;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="publisher")
-     */
+    #[ORM\OneToMany(mappedBy: 'publisher', targetEntity: Game::class)]
+    #[Groups(['Publisher'])]
     private Collection $games;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->games = new ArrayCollection();
     }
@@ -93,18 +88,6 @@ class Publisher
         $this->directorName = $directorName;
     }
 
-    public function getCreatedAt(): ?DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTime $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function getCountry(): Country
     {
         return $this->country;
@@ -118,7 +101,7 @@ class Publisher
     }
 
     /**
-     * @return Collection|Game[]
+     * @return Collection
      */
     public function getGames(): Collection
     {
@@ -145,5 +128,12 @@ class Publisher
         }
 
         return $this;
+    }
+
+    public static function getSlugFields(): array
+    {
+        return [
+            'name',
+        ];
     }
 }

@@ -6,52 +6,53 @@ use App\Repository\AccountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugInterface;
+use DrosalysWeb\ObjectExtensions\Slug\Model\SlugTrait;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampInterface;
+use DrosalysWeb\ObjectExtensions\Timestamp\Model\CreatedTimestampTrait;
+use JetBrains\PhpStorm\Pure;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(fields: 'email'), UniqueEntity(fields: 'id'), UniqueEntity(fields: 'name')]
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
-class Account
+class Account implements SlugInterface, CreatedTimestampInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    #[ORM\Id, ORM\GeneratedValue(strategy: 'AUTO'), ORM\Column(type: 'integer')]
+
+    use CreatedTimestampTrait;
+    use SlugTrait;
+
+    #[ORM\Id, ORM\GeneratedValue(strategy: 'CUSTOM'), ORM\CustomIdGenerator(class: UuidGenerator::class), ORM\Column(type: 'string', length: 36)]
     #[Groups(['Account'])]
     private int $id;
 
-    use TraitSlug;
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['Account'])]
+    #[Assert\NotBlank, Assert\Length(max: 180)]
+    private string $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email(message="account.constraints.email")
-     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['Account'])]
+    #[Assert\NotBlank, Assert\Email(message: "account.constraints.email"), Assert\Length(max: 180)]
     private string $email;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 180, nullable: true)]
+    #[Groups(['Account'])]
     private ?string $nickname;
 
-    /**
-     * @ORM\Column(type="float")
-     */
+    #[ORM\Column(type: 'float')]
+    #[Groups(['Account'])]
     private float $wallet;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Library::class, mappedBy="account")
-     */
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Library::class)]
     private Collection $libraries;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="account")
-     */
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
     private Collection $comments;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->libraries = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -61,6 +62,18 @@ class Account
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -100,7 +113,7 @@ class Account
     }
 
     /**
-     * @return Collection|Library[]
+     * @return Collection
      */
     public function getLibraries(): Collection
     {
@@ -122,8 +135,9 @@ class Account
 
         return $this;
     }
+
     /**
-     * @return Collection|Comment[]
+     * @return Collection
      */
     public function getComments(): Collection
     {
@@ -144,5 +158,13 @@ class Account
         $this->comments->removeElement($comment);
 
         return $this;
+    }
+
+    public static function getSlugFields(): array
+    {
+        return [
+            'name',
+            'id'
+        ];
     }
 }
