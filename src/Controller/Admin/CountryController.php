@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Country;
 use App\Form\CountryFormType;
@@ -13,17 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/country")
- *
  * Class CountryController
  * @package App\Controller
  */
+#[Route('/country')]
 class CountryController extends AbstractController
 {
-
-    private CountryRepository $countryRepository;
-    private EntityManagerInterface $em;
-    private TextService $textService;
 
     /**
      * CountryController constructor.
@@ -31,16 +26,13 @@ class CountryController extends AbstractController
      * @param EntityManagerInterface $em
      * @param TextService $textService
      */
-    public function __construct(CountryRepository $countryRepository, EntityManagerInterface $em, TextService $textService)
-    {
-        $this->countryRepository = $countryRepository;
-        $this->textService = $textService;
-        $this->em = $em;
-    }
+    public function __construct(
+        private CountryRepository $countryRepository,
+        private EntityManagerInterface $em,
+        private TextService $textService
+    ) { }
 
-    /**
-     * @Route("/", name="country_index")
-     */
+    #[Route('/', name: "country_index")]
     public function index(): Response
     {
         return $this->render('country/index.html.twig', [
@@ -49,17 +41,16 @@ class CountryController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="country_new")
      * @param Request $request
      * @return Response
      */
+    #[Route('/new', name: "country_new")]
     public function new(Request $request): Response
     {
         return $this->createFormFromEntity($request, new Country());
     }
 
     /**
-     * @Route("/edit/{id}", name="country_edit")
      * @param Request $request
      * @param Country $country
      * @return Response
@@ -67,6 +58,7 @@ class CountryController extends AbstractController
      * => $countryRepository->findOneBy(['id' => $request->get('id')]);
      *
      */
+    #[Route('/edit/{id}', name: "country_edit")]
     public function edit(Request $request, Country $country): Response
     {
         return $this->createFormFromEntity($request, $country, 'country/edit.html.twig');

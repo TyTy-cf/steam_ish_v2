@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\Comment;
 use App\Form\CommentFormType;
-use App\Repository\CommentRepository;
-use App\Repository\GameRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/comment')]
 class CommentController extends AbstractController
 {
 
@@ -27,9 +25,7 @@ class CommentController extends AbstractController
         $this->em = $em;
     }
 
-    /**
-     * @Route("comment/new", name="comment_create")
-     */
+    #[Route('/new', name: "comment_create")]
     public function genreCreate(Request $request): Response {
         $form = $this->createForm(CommentFormType::class, new Comment());
         $form->handleRequest($request);

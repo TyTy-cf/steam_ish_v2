@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\Game;
 use App\Repository\CommentRepository;
@@ -11,15 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/game")
- */
+#[Route('/game')]
 class GameController extends AbstractController
 {
-
-    private GameRepository $gameRepository;
-    private GenreRepository $genreRepository;
-    private CommentRepository $commentRepository;
 
     /**
      * GameController constructor.
@@ -28,22 +22,16 @@ class GameController extends AbstractController
      * @param CommentRepository $commentRepository
      */
     public function __construct(
-        GameRepository $gameRepository,
-        GenreRepository $genreRepository,
-        CommentRepository $commentRepository
-    )
-    {
-        $this->gameRepository = $gameRepository;
-        $this->genreRepository = $genreRepository;
-        $this->commentRepository = $commentRepository;
-    }
+        private GameRepository $gameRepository,
+        private GenreRepository $genreRepository,
+        private CommentRepository $commentRepository
+    ) { }
 
     /**
      * "/" : chemin de la route, c'est le chemin qui sera affiché dans l'URL
      * "game_index" : c'est le nom de la route, on s'en servira pour les redirections (href)
-     *
-     * @Route("/", name="game_index")
      */
+    #[Route('/', name: "game_index")]
     public function index(): Response
     {
         return $this->render('game/index.html.twig', [
@@ -52,12 +40,12 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="game_redirect")
-     * @Route("forum/{slugCateg}/{slugSubCateg}", name="forum_game_categ")
      * @param string $slug
      * @return Response
      * @throws NonUniqueResultException
      */
+    #[Route('/{slug}', name: "game_redirect")]
+    #[Route('/forum/{slugCateg}/{slugSubCateg}', name: "forum_game_categ")]
     public function gameRedirect(string $slug): Response {
         if (null != $game = $this->gameRepository->findGameBySlug($slug)) {
             return $this->forward(GameController::class . '::show', [
@@ -82,11 +70,11 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="game_genre")
      * @param string $slug
      * @return Response
      * @throws NonUniqueResultException
      */
+    #[Route('/{slug}', name: "game_genre")]
     public function genre(string $slug): Response
     {
         $genre = $this->genreRepository->findWithRelations($slug);
@@ -97,11 +85,11 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/comments", name="comments_game")
      * @param string $slug
      * @return Response
      * @throws NonUniqueResultException
      */
+    #[Route('/{slug}/comments', name: "comments_game")]
     public function gameComments(string $slug): Response
     {
         return $this->render('comment/index.html.twig', [

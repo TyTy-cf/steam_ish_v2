@@ -12,12 +12,11 @@ class HomeController extends AbstractController
 {
 
     /**
-     * @Route("/", name="home")
-     *
      * @param GameRepository $gameRepository
      * @param CommentRepository $commentRepository
      * @return Response
      */
+    #[Route('/', name: "home")]
     public function index(
         GameRepository $gameRepository,
         CommentRepository $commentRepository

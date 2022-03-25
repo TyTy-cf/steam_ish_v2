@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Publisher;
 use App\Form\PublisherFormType;
@@ -12,15 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/publisher")
- */
+#[Route('/publisher')]
 class PublisherController extends AbstractController
 {
-
-    private PublisherRepository $publisherRepository;
-    private EntityManagerInterface $em;
-    private TextService $textService;
 
     /**
      * PublisherController constructor.
@@ -28,16 +22,13 @@ class PublisherController extends AbstractController
      * @param EntityManagerInterface $em
      * @param TextService $textService
      */
-    public function __construct(PublisherRepository $publisherRepository, EntityManagerInterface $em, TextService $textService)
-    {
-        $this->publisherRepository = $publisherRepository;
-        $this->em = $em;
-        $this->textService = $textService;
-    }
+    public function __construct(
+        private PublisherRepository $publisherRepository,
+        private EntityManagerInterface $em,
+        private TextService $textService
+    ) { }
 
-    /**
-     * @Route("/", name="publisher_index")
-     */
+    #[Route('/', name: "publisher_index")]
     public function index(): Response
     {
         return $this->render('publisher/index.html.twig', [
@@ -46,23 +37,23 @@ class PublisherController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="publisher_new")
      * @param Request $request
      * @return Response
      */
+    #[Route('/new', name: "publisher_new")]
     public function new(Request $request): Response
     {
         return $this->createFormFromEntity($request, new Publisher());
     }
 
     /**
-     * @Route("/edit/{slug}", name="publisher_edit")
      * @param Request $request
      * @param Publisher $publisher
      * @return Response
      *
      * => $publisherRepository->findOneBy(['slug' => $request->get('slug')]);
      */
+    #[Route('/edit/{slug}', name: "publisher_edit")]
     public function edit(Request $request, Publisher $publisher): Response
     {
         return $this->createFormFromEntity($request, $publisher, 'publisher/edit.html.twig');
@@ -90,10 +81,10 @@ class PublisherController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{slug}", name="publisher_delete")
      * @param Publisher $publisher
      * @return Response
      */
+    #[Route('/delete/{slug}', name: "publisher_delete")]
     public function delete(Publisher $publisher): Response
     {
         $this->em->remove($publisher); // => DELETE FROM publisher WHERE slug = $publisher->getSlug()

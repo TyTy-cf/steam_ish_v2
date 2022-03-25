@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Genre;
 use App\Form\GenreFormType;
@@ -14,15 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/genre")
- */
+#[Route('/genre')]
 class GenreController extends AbstractController
 {
-
-    private EntityManagerInterface $em;
-    private GenreRepository $genreRepository;
-    private TextService $textService;
 
     /**
      * @param EntityManagerInterface $em
@@ -30,19 +24,12 @@ class GenreController extends AbstractController
      * @param TextService $textService
      */
     public function __construct(
-        EntityManagerInterface $em,
-        GenreRepository $genreRepository,
-        TextService $textService
-    )
-    {
-        $this->em = $em;
-        $this->textService = $textService;
-        $this->genreRepository = $genreRepository;
-    }
+        private EntityManagerInterface $em,
+        private GenreRepository $genreRepository,
+        private TextService $textService
+    )  { }
 
-    /**
-     * @Route("/", name="genre_index")
-     */
+    #[Route('/', name: "genre_index")]
     public function index(): Response {
         return $this->render('genre/index.html.twig',[
             'genres' => $this->genreRepository->findAll(),
@@ -50,21 +37,21 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="genre_create")
      * @param Request $request
      * @return Response
      */
+    #[Route('/new', name: "genre_create")]
     public function new(Request $request): Response {
         return $this->createFormFromEntity($request, new Genre(), 'genre/new.html.twig');
     }
 
     /**
-     * @Route("/{slug}", name="genre_show")
      * @param CommentRepository $commentRepository
      * @param string $slug
      * @return Response
      * @throws NonUniqueResultException
      */
+    #[Route('/{slug}', name: "genre_show")]
     public function show(CommentRepository $commentRepository, string $slug): Response {
         $genre = $this->genreRepository->findWithRelations($slug);
         return $this->render('genre/show.html.twig',[
@@ -74,11 +61,11 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{slug}", name="genre_edit")
      * @param Request $request
      * @param Genre $genre
      * @return Response
      */
+    #[Route('/edit/{slug}', name: "genre_edit")]
     public function edit(Request $request, Genre $genre): Response {
         return $this->createFormFromEntity($request, $genre, 'genre/edit.html.twig');
     }
