@@ -16,9 +16,6 @@ class GenreFormType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'account.index.table.name',
-                'attr' => [
-//                    'class' => 'bg-dark'
-                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'general.button.submit',
