@@ -82,6 +82,15 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "drosalys-web/form-bundle": {
+        "version": "v1.1.0"
+    },
+    "drosalys-web/object-extensions": {
+        "version": "v1.8.0"
+    },
+    "drosalys/api-bundle": {
+        "version": "v0.8.1"
+    },
     "egulias/email-validator": {
         "version": "3.1.2"
     },
@@ -100,14 +109,36 @@
             "./config/packages/fos_ckeditor.yaml"
         ]
     },
+    "knplabs/knp-components": {
+        "version": "v3.5.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.8.0"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "lexik/form-filter-bundle": {
+        "version": "v6.1.1"
     },
     "monolog/monolog": {
         "version": "2.3.5"
     },
     "myclabs/deep-copy": {
         "version": "1.10.2"
+    },
+    "nelmio/api-doc-bundle": {
+        "version": "4.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "c8e0c38e1a280ab9e37587a8fa32b251d5bc1c94"
+        },
+        "files": [
+            "./config/packages/nelmio_api_doc.yaml",
+            "./config/routes/nelmio_api_doc.yaml"
+        ]
     },
     "nikic/php-parser": {
         "version": "v4.13.2"
@@ -628,5 +659,8 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "zircote/swagger-php": {
+        "version": "3.3.4"
     }
 }

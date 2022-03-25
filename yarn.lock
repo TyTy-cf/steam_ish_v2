@@ -893,6 +893,11 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.6.tgz#d5e0706cf8c6acd8c6032f8d54070af261bbbb2f"
   integrity sha512-ws57AidsDvREKrZKYffXddNkyaF14iHNHm8VQnZH6t99E8gczjNN0GpvcGny0imC80yQ0tHz1xVUKk/KFQSUyA==
 
+"@drosalys/form-collection@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@drosalys/form-collection/-/form-collection-0.2.0.tgz#7fb06c4e4cd4d2b08cf32193a9ff89709521eeeb"
+  integrity sha512-NpJhuJNP+kI5YLs1bsx3bTgmInB8LNrar0UKPTcS/6w+v1mvKi6h0mQtK5VOc/12ad2JX+R2t63cFcrmWKbBXQ==
+
 "@fortawesome/fontawesome-free@^5.15.4":
   version "5.15.4"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.4.tgz#ecda5712b61ac852c760d8b3c79c96adca5554e5"

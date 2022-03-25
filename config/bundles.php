@@ -14,4 +14,9 @@ return [
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
+    DrosalysWeb\Bundle\FormBundle\DrosalysWebFormBundle::class => ['all' => true],
+    Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
+    Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle::class => ['all' => true],
+    Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
+    Drosalys\Bundle\ApiBundle\DrosalysApiBundle::class => ['all' => true],
 ];
