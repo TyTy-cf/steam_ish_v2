@@ -1,20 +1,24 @@
 
-<div class="container col-6 mt-1 mx-auto">
+<div class="container col-lg-6 mt-1 mx-auto">
     <h1>{{ 'game.new.title'|trans }}</h1>
     {{ form_start(form) }}
-        <div class="row">
-            <div class="form-group col-lg-12">
+        <div class="row mt-2">
+            <div class="form-group col-lg-6">
                 {{ form_label(form.name) }}
                 {{ form_widget(form.name) }}
             </div>
+            <div class="form-group col-lg-6">
+                {{ form_label(form.publisher) }}
+                {{ form_widget(form.publisher) }}
+            </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="form-group col-lg-12">
                 {{ form_label(form.description) }}
                 {{ form_widget(form.description) }}
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="form-group col-lg-6">
                 {{ form_label(form.publishedAt) }}
                 {{ form_widget(form.publishedAt) }}
@@ -22,6 +26,28 @@
             <div class="form-group col-lg-6">
                 {{ form_label(form.price) }}
                 {{ form_widget(form.price) }}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="form-group col-lg-12">
+                {{ form_label(form.thumbnailCover) }}
+                {{ form_widget(form.thumbnailCover) }}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="form-group col-lg-12">
+                {{ form_label(form.thumbnailLogo) }}
+                {{ form_widget(form.thumbnailLogo) }}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="form-group col-lg-6">
+                {{ form_label(form.countries) }}
+                {{ form_widget(form.countries) }}
+            </div>
+            <div class="form-group col-lg-6">
+                {{ form_label(form.genres) }}
+                {{ form_widget(form.genres) }}
             </div>
         </div>
     {{ form_end(form) }}

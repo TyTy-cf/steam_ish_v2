@@ -65,19 +65,28 @@ class GameFormType extends AbstractType
                 'label' => 'game.form.countries',
                 // Ici on voulait ajouter plusieurs entity, donc avoir une Collection d'EntityType
                 'entry_type' => EntityType::class,
-                // Il faut bien penser à ajouter les allow_add et allow_delete afin de pouvoir ajouter les formulaires au fur et à mesure
+                'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'add_btn_icon' => 'fas fa-plus-circle',
+                'add_btn_class' => 'btn add-button mr-1',
+                'add_btn_label' => false,
+                'delete_btn_class' => 'btn cancel-button mx-1 mb-4',
+                'delete_btn_label' => false,
+                'delete_btn_icon' => 'fas fa-trash-alt',
                 'attr' => [
-                    // Pensez à bien garder ce nom de data-selector si vous utilisez mon JS
-                    // La valeur du data selector doit être identique à celle du bouton d'ajout
-                    'data-list-selector' => 'countries'
+                    'class' => 'my-2 mx-auto',
                 ],
                 // On rempli les informations nécessaires au paramétrage de l'EntityType dans "entry_options"
                 'entry_options' => [
+                    'collapsable' => true,
+                    'attr' => [
+                        'data-form-collapsable' => false,
+                    ],
                     'label' => false,
                     'class' => Country::class,
                     'choice_label' => 'nationality',
+                    'choice_value' => 'id',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('e')
                             ->orderBy('e.nationality', 'ASC')
@@ -85,40 +94,34 @@ class GameFormType extends AbstractType
                     }
                 ]
             ])
-            // Le code du bouton permettant d'ajouter un formulaire de "country" (ici on utilise un EntityType)
-            ->add('addCountry', ButtonType::class, [
-                'label' => 'game.form.add_country',
-                'attr' => [
-                    'class' => 'btn btn-info',
-                    // Même punition que pour le "data-list-selector" définit dans le CollectionType
-                    // On ne change pas son nom (si vous gardez mon JS) et sa valeur doit être identique à celle la CollectionType
-                    'data-btn-selector' => 'countries',
-                ]
-            ])
             ->add('genres', CollectionType::class, [
-                'label' => 'game.form.genres',
                 'entry_type' => EntityType::class,
+                'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'add_btn_icon' => 'fas fa-plus-circle',
+                'add_btn_class' => 'btn add-button mr-1',
+                'add_btn_label' => false,
+                'delete_btn_class' => 'btn cancel-button mx-1 mb-4',
+                'delete_btn_label' => false,
+                'delete_btn_icon' => 'fas fa-trash-alt',
                 'attr' => [
-                    'data-list-selector' => 'genres'
+                    'class' => 'my-2 mx-auto',
                 ],
                 'entry_options' => [
+                    'collapsable' => true,
+                    'attr' => [
+                        'data-form-collapsable' => false,
+                    ],
                     'label' => false,
                     'class' => Genre::class,
                     'choice_label' => 'name',
+                    'choice_value' => 'id',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('e')
                             ->orderBy('e.name', 'ASC')
                         ;
                     }
-                ]
-            ])
-            ->add('addgenres', ButtonType::class, [
-                'label' => 'game.form.add_genre',
-                'attr' => [
-                    'class' => 'btn btn-info',
-                    'data-btn-selector' => 'genres',
                 ]
             ])
             ->add('submit', SubmitType::class, [

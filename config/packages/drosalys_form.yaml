@@ -1,0 +1,3 @@
+drosalys_form:
+    collection:
+        main_form_template: 'bootstrap_4_layout.html.twig'

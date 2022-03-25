@@ -7,13 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=AccountRepository::class)
- * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
- * @UniqueEntity(fields={"email"}, message="account.constraints.unique.email")
- */
+#[UniqueEntity(fields: 'email'), UniqueEntity(fields: 'id'), UniqueEntity(fields: 'name')]
+#[ORM\Entity(repositoryClass: AccountRepository::class)]
 class Account
 {
     /**
@@ -21,6 +19,8 @@ class Account
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[ORM\Id, ORM\GeneratedValue(strategy: 'AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['Account'])]
     private int $id;
 
     use TraitSlug;
