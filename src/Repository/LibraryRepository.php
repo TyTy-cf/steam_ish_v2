@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Account;
 use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,32 +20,22 @@ class LibraryRepository extends ServiceEntityRepository
         parent::__construct($registry, Library::class);
     }
 
-    // /**
-    //  * @return Library[] Returns an array of Library objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+    /**
+     * @param Account $account
+     * @return int
+     */
+    public function getTotalGameTimeByAccount(Account $account): int {
+        $qb = $this->createQueryBuilder('l')
+            ->select('SUM(l.gameTime)')
+            ->join('l.account', 'account')
+            ->where('l.account = :account')
+            ->setParameter('account', $account)
             ->getQuery()
-            ->getResult()
+            ->getResult()[0][1]
         ;
+        if ($qb == null){
+            $qb = '0';
+        }
+        return intval($qb);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Library
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

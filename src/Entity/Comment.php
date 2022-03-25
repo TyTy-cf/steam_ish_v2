@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ApiResource()
  */
 class Comment
 {
@@ -39,7 +41,7 @@ class Comment
     private int $downVotes;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Account::class)
+     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private Account $account;
@@ -61,19 +63,19 @@ class Comment
         return $this->id;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?DateTime $createdAt): self
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -85,7 +87,7 @@ class Comment
         return $this;
     }
 
-    public function getUpVotes(): ?int
+    public function getUpVotes(): int
     {
         return $this->upVotes;
     }
@@ -97,7 +99,7 @@ class Comment
         return $this;
     }
 
-    public function getDownVotes(): ?int
+    public function getDownVotes(): int
     {
         return $this->downVotes;
     }
@@ -109,24 +111,24 @@ class Comment
         return $this;
     }
 
-    public function getAccount(): ?Account
+    public function getAccount(): Account
     {
         return $this->account;
     }
 
-    public function setAccount(?Account $account): self
+    public function setAccount(Account $account): self
     {
         $this->account = $account;
 
         return $this;
     }
 
-    public function getGame(): ?Game
+    public function getGame(): Game
     {
         return $this->game;
     }
 
-    public function setGame(?Game $game): self
+    public function setGame(Game $game): self
     {
         $this->game = $game;
 

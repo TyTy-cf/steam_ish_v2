@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'country.index.title'|trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <a class="btn btn-info my-2" href="{{ path('country_new') }}">
+            {{ 'country.index.create'|trans }}
+        </a>
+        <table class="table table-striped table-dark text-center table-hover">
+            <thead>
+            <tr>
+                <th>{{ 'country.index.table.name'|trans }}</th>
+                <th>{{ 'country.index.table.nationality'|trans }}</th>
+                <th>{{ 'country.index.table.code'|trans }}</th>
+                <th>{{ 'country.index.table.flag'|trans }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if countries|length > 0 %}
+                {% for country in countries %}
+                    <tr>
+                        <td>{{ country.name }}</td>
+                        <td>{{ country.nationality }}</td>
+                        <td>{{ country.code }}</td>
+                        <td>
+                            {% if country.urlFlag is defined %}
+                                <img src="{{ country.urlFlag }}" alt="{{ 'country.index.flag_alt'|trans({'%country%': country.name}) }}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="logo-link" href="{{ path('country_edit', {'id': country.id}) }}">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">{{ 'country.index.table.empty'|trans }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

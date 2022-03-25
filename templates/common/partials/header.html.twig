@@ -1,18 +1,29 @@
 
-<header>
+<div class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand ms-3" href="{{ path('home') }}">{{ 'home.title'|trans }}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="{{ path('account_index') }}">{{ 'home.menu.accounts'|trans }}<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ path('account_index') }}">{{ 'home.menu.accounts'|trans }}</a>
                 <a class="nav-item nav-link" href="{{ path('game_index') }}">{{ 'home.menu.games'|trans }}</a>
+                <div class="dropdown ms-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </button>
+                    <div class="dropdown-menu dropdown-dark" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('genre_index') }}">Genres</a>
+                        <a class="dropdown-item" href="{{ path('country_index') }}">Pays</a>
+                        <a class="dropdown-item" href="{{ path('publisher_index') }}">Editeur</a>
+                        <a class="dropdown-item" href="{{ path('admin_game_new') }}">Jeux</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="navbar-nav float-end me-3">
             <input type="text" class="form-control" placeholder="{{ 'home.search.placeholder'|trans }}" data-games-search>
         </div>
     </nav>
-</header>
+</div>

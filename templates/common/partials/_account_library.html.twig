@@ -1,0 +1,26 @@
+
+
+<div class="{{ classCss }} my-2">
+    <a href="{{ path('game_redirect', {'slug': lib.game.slug}) }}" class="{{ classCss }} text-decoration-none">
+        <div class="card-game">
+            <div class="{{ containerImage }}">
+                <div class="container-installed">
+                    <div class="installed">
+                        <i class="fas fa-circle {% if lib.installed == 1 %}text-success{% else %}text-danger{% endif %}"></i>
+                    </div>
+                </div>
+                <img class="img-100" src="{{ lib.game.thumbnailCover }}">
+                <div class="container-price">
+                    <div class="price">
+                        {{ lib.timeConverter }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-bottom">
+                <p class="text-center">
+                    {{ lib.game.name }}
+                </p>
+            </div>
+        </div>
+    </a>
+</div>

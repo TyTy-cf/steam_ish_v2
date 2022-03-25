@@ -6,14 +6,24 @@
 
 .container-image {
 
-  height: 200px;
+  height: 250px;
 
   &-higher {
-    height: 280px;
+    height: 310px;
   }
 
   &-logo {
     height: 80px;
+    > img {
+      width: auto;
+    }
+  }
+
+  &-flag {
+    height: 36px;
+    > img {
+      width: auto;
+    }
   }
 }
 
@@ -22,3 +32,25 @@
   width: 100%;
 }
 
+.btn-info {
+  color: $background-lighter;
+  border-color: $background-lighter;
+  background-color: $default-background-color-l15;
+  &:hover {
+    color: $background-lighter;
+    border-color: $background-lighter;
+    background-color: $default-background-color-l30;
+  }
+}
+
+.dropdown-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  > a {
+    color: $background-lighter;
+    &:hover {
+      color: $background-lighter;
+      background-color: $background-title;
+    }
+  }
+}

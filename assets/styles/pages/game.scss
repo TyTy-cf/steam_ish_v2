@@ -5,6 +5,10 @@
   background-color: $default-background-color-l15;
   color: $background-lighter;
   padding: 0.2em 0.4em;
+
+  &:hover {
+    background-color: $default-background-color-l30;
+  }
 }
 
 .game-price {

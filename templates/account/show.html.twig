@@ -8,30 +8,57 @@
 
     <br>
     <div class="container">
-        <div class="text-center">
-            <h4>{{ 'account.index.table.name'|trans }}</h4>
-            <p>{{ account.name }}</p>
-            <h4>{{ 'account.index.table.email'|trans }}</h4>
-            <p>{{ account.email }}</p>
-            <h4>{{ 'account.index.table.nickname'|trans }}</h4>
-            <p>{{ account.nickname }}</p>
-            <h4>{{ 'account.index.table.wallet'|trans }}</h4>
-            <p>{{ account.wallet }}</p>
+        <div class="mx-auto my-2">
+            <table class="table table-striped table-dark">
+                <tbody>
+                    <tr>
+                        <th>{{ 'account.index.table.name'|trans }}</th>
+                        <td>{{ account.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'account.index.table.email'|trans }}</th>
+                        <td>{{ account.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'account.index.table.nickname'|trans }}</th>
+                        <td>{{ account.nickname }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'account.index.table.wallet'|trans }}</th>
+                        <td>{{ account.wallet }}€</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card-price">
+                <div class="container-price">
+                    <div class="price">
+                        {{ 'account.index.table.total_time'|trans }} : {{ totalGameTime }}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
+            <h2>{{ 'account.show.games'|trans }}</h2>
             {% for lib in account.libraries %}
-                <div class="col-20">
-                    {{ lib.game.name }}
-                    {{ lib.timeConverter }}
-                </div>
-{#                {% include 'common/partials/game-card.html.twig' with#}
-{#                    {#}
-{#                        'game': lib.game,#}
-{#                        'classCss': 'col-20 col-md-4',#}
-{#                        'containerImage': 'container-image'#}
-{#                    }#}
-{#                %}#}
+                {% include 'common/partials/_account_library.html.twig' with
+                    {
+                        'lib': lib,
+                        'classCss': 'col-20 col-md-4',
+                        'containerImage': 'container-image'
+                    }
+                %}
             {% endfor %}
+        </div>
+        <div class="row">
+            <h2>{{ 'account.show.comments'|trans }}</h2>
+            {% include 'common/partials/comment_loop.html.twig' with
+                {
+                    'comments': comments,
+                    'classCss': 'col-lg-3 col-md-6',
+                    'isHidden': false,
+                    'hideAccount': true
+                }
+            %}
         </div>
     </div>
 

@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\LanguageRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass=LanguageRepository::class)
+ * @ORM\Entity(repositoryClass=CountryRepository::class)
+ * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
+ * @ApiResource()
  */
-class Language
+class Country
 {
     /**
      * @ORM\Id
@@ -19,18 +23,25 @@ class Language
      */
     private int $id;
 
+    use TraitSlug;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $name;
+    private string $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $flag;
+    private ?string $urlFlag;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="languages")
+     * @ORM\Column(type="string", length=6)
+     */
+    private string $code;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="countries")
      */
     private Collection $games;
 
@@ -44,28 +55,32 @@ class Language
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getUrlFlag(): ?string
     {
-        return $this->name;
+        return $this->urlFlag;
     }
 
-    public function setName(string $name): self
+    public function setUrlFlag(string $urlFlag): self
     {
-        $this->name = $name;
+        $this->urlFlag = $urlFlag;
 
         return $this;
     }
 
-    public function getFlag(): ?string
+    /**
+     * @return string
+     */
+    public function getNationality(): string
     {
-        return $this->flag;
+        return $this->nationality;
     }
 
-    public function setFlag(?string $flag): self
+    /**
+     * @param string $nationality
+     */
+    public function setNationality(string $nationality): void
     {
-        $this->flag = $flag;
-
-        return $this;
+        $this->nationality = $nationality;
     }
 
     /**
@@ -91,6 +106,18 @@ class Language
         if ($this->games->removeElement($game)) {
             $game->removeLanguage($this);
         }
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+    {{ 'publisher.index.title'|trans }}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <a class="btn btn-info my-2" href="{{ path('publisher_new') }}">
+            {{ 'publisher.index.create'|trans }}
+        </a>
+        <table class="table table-striped table-dark text-center table-hover">
+            <thead>
+            <tr>
+                <th>{{ 'publisher.index.table.name'|trans }}</th>
+                <th>{{ 'publisher.index.table.directorName'|trans }}</th>
+                <th>{{ 'publisher.index.table.created_at'|trans }}</th>
+                <th>{{ 'publisher.index.table.nationality'|trans }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if publishers|length > 0 %}
+                {% for publisher in publishers %}
+                    <tr>
+                        <td>{{ publisher.name }}</td>
+                        <td>{{ publisher.directorName }}</td>
+                        <td>{{ publisher.createdAt|date('d/m/Y') }}</td>
+                        <td>
+                            {% if publisher.country.urlFlag is defined %}
+                                <img src="{{ publisher.country.urlFlag }}" alt="{{ 'country.index.flag_alt'|trans({'%country%': publisher.country.name}) }}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="logo-link" href="{{ path('publisher_edit', {'slug': publisher.slug}) }}">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a class="logo-link red" href="{{ path('publisher_delete', {'slug': publisher.slug}) }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">{{ 'publisher.index.table.empty'|trans }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

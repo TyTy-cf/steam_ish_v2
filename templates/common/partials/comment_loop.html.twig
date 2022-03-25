@@ -3,7 +3,7 @@
     <div class="{{ classCss }} p-1">
         <div class="my-2 comment-card">
             <div class="comment-card-game">
-                <a class="{% if isHidden %}d-none{% endif %}" href="{{ path('game_show', {'slug': comment.game.slug}) }}">
+                <a class="{% if isHidden %}d-none{% endif %}" href="{{ path('game_redirect', {'slug': comment.game.slug}) }}">
                     {{ comment.game.name }}
                 </a>
             </div>
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="comment-card-footer">
-                <a href="{{ path('account_show', {'name': comment.account.name}) }}">
+                <a href="{{ path('account_show', {'name': comment.account.name}) }}" class="{% if hideAccount is defined %}d-none{% endif %}">
                     {{ 'home.menu.comment.writted_by'|trans({
                         '%name%': comment.account.name,
                     }) }}

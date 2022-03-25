@@ -5,26 +5,24 @@
 {% endblock %}
 
 {% block body %}
+
     <div class="container">
-        <h1>{{ game.name }}</h1>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-4">
-                <img class="img-fluid" src="{{ game.thumbnailCover }}">
+                <img class="img-100" src="{{ game.thumbnailCover }}" alt="{{ game.name }}">
             </div>
             <div class="col-8">
-                {% if game.thumbnailLogo is not null %}
-                    <div class="text-center container-image-logo mb-5">
-                        <img class="img-fluid" src="{{ game.thumbnailLogo }}" alt="Game logo">
-                    </div>
-                {% endif %}
+                <h1 class="text-center">{{ game.name }}</h1>
                 <div>
                     {% for genre in game.genres %}
-                        <span class="game-item">{{ genre.name }}</span>
+                        <a href="{{ path('game_genre', {'slug': genre.slug }) }}" class="text-decoration-none">
+                            <span class="game-item">{{ genre.name }}</span>
+                        </a>
                     {% endfor %}
                 </div>
                 <div class="my-4">
-                    {% for language in game.languages %}
-                        <span class="game-item">{{ language.name }}</span>
+                    {% for country in game.countries %}
+                        <img src="{{ country.urlFlag }}">
                     {% endfor %}
                 </div>
                 <div class="game-description">
@@ -35,23 +33,25 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4">
-            <div class="row">
-                <h4 class="text-center col-10 offset-1">{{ 'game.show.all_comments'|trans }}</h4>
-                <a class="btn btn-outline-light col-1" href="{{ path('comments_game', {'slug': game.slug}) }}">
-                    {{ 'general.see_all'|trans }}
-                </a>
+        {% if game.comments|length > 0 %}
+            <div class="mt-4">
+                <div class="row">
+                    <h4 class="text-center col-10 offset-1">{{ 'game.show.all_comments'|trans }}</h4>
+                    <a class="btn btn-info col-1" href="{{ path('comments_game', {'slug': game.slug}) }}">
+                        {{ 'general.see_all'|trans }}
+                    </a>
+                </div>
+                <div class="row">
+                    {% include 'common/partials/comment_loop.html.twig' with
+                        {
+                            'isHidden': 1,
+                            'comments': game.comments[0:10],
+                            'classCss': 'col-20'
+                        }
+                    %}
+                </div>
             </div>
-            <div class="row">
-                {% include 'common/partials/comment_loop.html.twig' with
-                    {
-                        'isHidden': 1,
-                        'comments': game.comments[0:10],
-                        'classCss': 'col-20'
-                    }
-                %}
-            </div>
-        </div>
+        {% endif %}
         <div class="mt-4">
             <h4 class="text-center">{{ 'game.show.related_games'|trans }}</h4>
             <div class="row">
@@ -66,5 +66,6 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 

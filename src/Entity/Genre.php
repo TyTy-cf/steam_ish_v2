@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\GenreRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=GenreRepository::class)
+ * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
+ * @ApiResource()
  */
 class Genre
 {
@@ -19,10 +23,7 @@ class Genre
      */
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
+    use TraitSlug;
 
     /**
      * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="genres")
@@ -37,18 +38,6 @@ class Genre
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**

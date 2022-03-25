@@ -9,9 +9,12 @@ account:
       nb_games: 'Quantité jeux'
       wallet: 'Portefeuille'
       empty: 'Aucun compte'
+      total_time: 'Temps de jeu total'
     create: 'Créer un compte'
   show:
     title: 'Détails du compte %name%'
+    games: 'Ses jeux'
+    comments: 'Ses commentaires'
   new:
     title: "Création d'un compte"
   edit:
@@ -38,6 +41,20 @@ game:
     related_games: 'Les jeux similaires'
   comment:
     details: 'Les commentaires de %game%'
+  form:
+    published_at: 'Date de sortie'
+    price: 'Prix'
+    description: 'Description'
+    thumbnailCover: 'Image de couverture'
+    thumbnailLogo: 'Logo du jeu'
+    name: 'Nom'
+    publisher: 'Editeur'
+    countries: 'Langues'
+    add_country: 'Ajouter pays'
+    genres: 'Genres'
+    add_genre: 'Ajouter genre'
+  new:
+    title: 'Ajouter un jeu'
 general:
   see_all: 'Voir tout'
   button:
@@ -45,8 +62,49 @@ general:
 genre:
   new:
     title: "Ajout d'un genre"
+  edit:
+    title: 'Modifier un genre'
+  index:
+    create: 'Ajouter un genre'
+    table:
+      name: 'Nom'
+      slug: 'Slug'
+      empty: 'Pas de genres'
+  show:
+    related_games: 'Les jeux'
+    related_comments: 'Les commentaires des derniers jeux'
 comment:
   form:
     content: 'Contenu'
   new:
     title: "Ajouter commentaire"
+country:
+  index:
+    title: 'Liste des pays'
+    flag_alt: 'Drapeau de %country%'
+    table:
+      name: 'Nom'
+      nationality: 'Nationalité'
+      code: 'Code'
+      flag: 'Drapeau'
+      empty: 'Pas de pays'
+    create: "Création d'un pays"
+  new:
+    title: "Ajout d'un pays"
+  edit:
+    title: "Modification d'un pays"
+publisher:
+  index:
+    title: 'Les éditeurs'
+    create: 'Ajouter un éditeur'
+    table:
+      name: 'Nom'
+      directorName: 'Directeur'
+      created_at: 'Date de création'
+      website: 'Site Web'
+      nationality: 'Nationalité'
+      empty: "Pas d'éditeur"
+  new:
+    title: "Ajout d'un éditeur"
+  edit:
+    title: "Modifier un éditeur"

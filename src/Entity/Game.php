@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GameRepository;
 use DateTime;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=GameRepository::class)
+ * @UniqueEntity(fields={"name"}, message="account.constraints.unique.name")
+ * @ApiResource()
  */
 class Game
 {
@@ -21,10 +24,7 @@ class Game
      */
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
+    use TraitSlug;
 
     /**
      * @ORM\Column(type="datetime")
@@ -52,9 +52,9 @@ class Game
     private ?string $thumbnailLogo;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Language::class, inversedBy="games")
+     * @ORM\ManyToMany(targetEntity=Country::class, inversedBy="games")
      */
-    private Collection $languages;
+    private Collection $countries;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="games")
@@ -67,13 +67,13 @@ class Game
     private Collection $comments;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity=Publisher::class, inversedBy="games")
      */
-    private ?string $slug;
+    private Publisher $publisher;
 
     public function __construct()
     {
-        $this->languages = new ArrayCollection();
+        $this->countries = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -156,25 +156,25 @@ class Game
     }
 
     /**
-     * @return Collection|Language[]
+     * @return Collection|Country[]
      */
-    public function getLanguages(): Collection
+    public function getCountries(): Collection
     {
-        return $this->languages;
+        return $this->countries;
     }
 
-    public function addLanguage(Language $language): self
+    public function addLanguage(Country $language): self
     {
-        if (!$this->languages->contains($language)) {
-            $this->languages[] = $language;
+        if (!$this->countries->contains($language)) {
+            $this->countries[] = $language;
         }
 
         return $this;
     }
 
-    public function removeLanguage(Language $language): self
+    public function removeLanguage(Country $language): self
     {
-        $this->languages->removeElement($language);
+        $this->countries->removeElement($language);
 
         return $this;
     }
@@ -235,6 +235,18 @@ class Game
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPublisher(): Publisher
+    {
+        return $this->publisher;
+    }
+
+    public function setPublisher(Publisher $publisher): self
+    {
+        $this->publisher = $publisher;
 
         return $this;
     }

@@ -26,20 +26,6 @@ class CommentController extends AbstractController
     {
         $this->em = $em;
     }
-    
-    /**
-     * @Route("game/{slug}/comments", name="comments_game")
-     * @throws NonUniqueResultException
-     */
-    public function index(
-        GameRepository $gameRepository,
-        string $slug
-    ): Response
-    {
-        return $this->render('comment/index.html.twig', [
-            'game' => $gameRepository->findGameBySlug($slug),
-        ]);
-    }
 
     /**
      * @Route("comment/new", name="comment_create")

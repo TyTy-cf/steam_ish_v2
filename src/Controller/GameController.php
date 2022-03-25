@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
+use App\Repository\GenreRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,13 +18,24 @@ class GameController extends AbstractController
 {
 
     private GameRepository $gameRepository;
+    private GenreRepository $genreRepository;
+    private CommentRepository $commentRepository;
 
     /**
+     * GameController constructor.
      * @param GameRepository $gameRepository
+     * @param GenreRepository $genreRepository
+     * @param CommentRepository $commentRepository
      */
-    public function __construct(GameRepository $gameRepository)
+    public function __construct(
+        GameRepository $gameRepository,
+        GenreRepository $genreRepository,
+        CommentRepository $commentRepository
+    )
     {
         $this->gameRepository = $gameRepository;
+        $this->genreRepository = $genreRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     /**
@@ -39,15 +52,60 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="game_show")
+     * @Route("/{slug}", name="game_redirect")
+     * @Route("forum/{slugCateg}/{slugSubCateg}", name="forum_game_categ")
+     * @param string $slug
+     * @return Response
      * @throws NonUniqueResultException
      */
-    public function show(string $slug): Response
+    public function gameRedirect(string $slug): Response {
+        if (null != $game = $this->gameRepository->findGameBySlug($slug)) {
+            return $this->forward(GameController::class . '::show', [
+                'game' => $game,
+            ]);
+        }
+        return $this->forward(GameController::class . '::genre', [
+            'slug' => $slug,
+        ]);
+    }
+
+    /**
+     * @param Game $game
+     * @return Response
+     */
+    public function show(Game $game): Response
     {
-        $games = $this->gameRepository->findGameBySlug($slug);
         return $this->render('game/show.html.twig', [
-            'game' => $games,
-            'relatedGames' => $this->gameRepository->findRelatedGameByGenres($games->getGenres(), 5),
+            'game' => $game,
+            'relatedGames' => $this->gameRepository->findRelatedGameByGenres($game->getGenres()),
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}", name="game_genre")
+     * @param string $slug
+     * @return Response
+     * @throws NonUniqueResultException
+     */
+    public function genre(string $slug): Response
+    {
+        $genre = $this->genreRepository->findWithRelations($slug);
+        return $this->render('genre/show.html.twig',[
+            'genre' => $genre,
+            'lastComments' => $this->commentRepository->findByGenre($genre, 8),
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}/comments", name="comments_game")
+     * @param string $slug
+     * @return Response
+     * @throws NonUniqueResultException
+     */
+    public function gameComments(string $slug): Response
+    {
+        return $this->render('comment/index.html.twig', [
+            'game' => $this->gameRepository->findGameBySlug($slug),
         ]);
     }
 }

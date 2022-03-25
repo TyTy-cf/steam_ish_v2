@@ -24,10 +24,10 @@ class CommentFormType extends AbstractType
             ])
             ->add('account', EntityType::class, [
                 'class' => Account::class,
-                'choice_label' => 'email',
+                'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                        ->orderBy('u.email', 'ASC');
+                        ->orderBy('u.name', 'ASC');
                 }
             ])
             ->add('game', EntityType::class, [
