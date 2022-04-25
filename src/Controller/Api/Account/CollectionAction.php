@@ -14,9 +14,11 @@ class CollectionAction
 
     /**
      * Get User account list.
+     * @param AccountRepository $accountRepository
+     * @return QueryBuilder
      */
-    #[Get('/api/accounts')]
-    #[Serializable(groups: 'Accounts')]
+    #[Get('/api/account')]
+    #[Serializable(groups: 'Account')]
     #[Paginable(Account::class)]
     public function __invoke(AccountRepository $accountRepository): QueryBuilder
     {

@@ -16,23 +16,23 @@ class Library implements CreatedTimestampInterface
     use CreatedTimestampMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Library'])]
+    #[Groups(['Library', 'Account'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'boolean', options: ['default' => 0])]
-    #[Groups(['Library'])]
+    #[Groups(['Library', 'Account'])]
     private bool $installed;
 
     #[ORM\Column(type: 'integer', options: ['default' => 0])]
-    #[Groups(['Library'])]
+    #[Groups(['Library', 'Account'])]
     private int $gameTime;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(['Game'])]
+    #[Groups(['Library', 'Account'])]
     private DateTime $lastUsedAt;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(['Account'])]
+    #[Groups(['Library', 'Account'])]
     protected ?DateTime $createdAt;
 
     /**
@@ -41,7 +41,7 @@ class Library implements CreatedTimestampInterface
      * connaît l'autre entité, mais l'autre entité ne connait pas la classe courante
      */
     #[ORM\ManyToOne(targetEntity: Game::class)]
-    #[Groups(['Library'])]
+    #[Groups(['Library', 'Account'])]
     private Game $game;
 
     /**

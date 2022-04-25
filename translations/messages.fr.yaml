@@ -27,7 +27,7 @@ home:
     most_games: 'Tous les jeux'
     recent_games: 'Les dernières sorties'
     last_comments: 'Les derniers commentaires'
-    most_played: 'Les jeux les plus jouer'
+    most_played: 'Les jeux les plus joués'
     comment:
       writted_by: 'Par %name%'
       writted_on: 'Le %date%'

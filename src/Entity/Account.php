@@ -47,6 +47,7 @@ class Account implements SlugInterface, CreatedTimestampInterface
     private float $wallet;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Library::class)]
+    #[Groups(['Account'])]
     private Collection $libraries;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
