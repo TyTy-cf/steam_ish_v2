@@ -70,331 +70,331 @@ App\Entity\Country:
         nationality: 'Polonais'
         code: 'pl'
 
-App\Entity\Games:
+App\Entity\Game:
     games_0:
         name: 'La League des Légendes'
         publishedAt: <dateTimeBetween('2009-01-01', '2009-12-31')>
         price: <numberBetween(15, 20)>
         genres: ['@genre_5']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_1:
         name: 'World of Warcraft'
         publishedAt: <dateTimeBetween('2004-01-01', '2004-12-31')>
         price: <numberBetween(30, 35)>
         genres: '@genre_{3, 4}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_2:
         name: 'Overwatch'
         publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
         price: <numberBetween(15, 20)>
         genres: ['@genre_2']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_3:
         name: 'Starcraft'
         publishedAt: <dateTimeBetween('1998-01-01', '1998-12-31')>
         price: <numberBetween(15, 20)>
         genres: ['@genre_0']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_4:
         name: 'Civilization VI'
         publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
         price: <numberBetween(15, 20)>
         genres: ['@genre_0']
-        languages: '@language_{0, 1, 3}'
+        countries: '@country_{0, 1, 3}'
         description : '<paragraph(8)>'
     games_5:
         name: 'Call of Duty'
         publishedAt: <dateTimeBetween('2003-01-01', '2003-12-31')>
         price: <numberBetween(15, 20)>
         genres: ['@genre_2']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_6:
         name: 'Apex la Légende'
         publishedAt: <dateTimeBetween('2019-01-01', '2019-12-31')>
         price: <numberBetween(5, 10)>
         genres: '@genre_{2, 7}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_7:
         name: 'Counter Strike : Globale Offensive'
         publishedAt: <dateTimeBetween('2012-01-01', '2012-12-31')>
         price: <numberBetween(10, 15)>
         genres: ['@genre_2']
-        languages: '@language_{0, 1, 2, 6, 7}'
+        countries: '@country_{0, 1, 2, 6, 7}'
         description : '<paragraph(8)>'
     games_8:
         name: 'Player Unknown Battleground'
         publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
         price: <numberBetween(10, 15)>
         genres: '@genre_{2, 7}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_9:
         name: 'DotA 2'
         publishedAt: <dateTimeBetween('2013-01-01', '2013-12-31')>
         price: <numberBetween(0, 5)>
         genres: ['@genre_5']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_10:
         name: 'GTA V'
         publishedAt: <dateTimeBetween('2013-01-01', '2013-12-31')>
         price: <numberBetween(40, 50)>
         genres: '@genre_{2, 6, 8, 9}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_11:
         name: 'Minecraft'
         publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
         price: <numberBetween(20, 25)>
         genres: ['@genre_6']
-        languages: '@language_{1, 2, 6, 7}'
+        countries: '@country_{1, 2, 6, 7}'
         description : '<paragraph(8)>'
     games_12:
         name: 'The Witcher III : Wild Hunt'
         publishedAt: <dateTimeBetween('2015-01-01', '2015-12-31')>
         price: <numberBetween(15, 20)>
         genres: '@genre_{9, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_13:
         name: 'The Elder Scrolls V : Skyrim'
         publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
         price: <numberBetween(35, 40)>
         genres: '@genre_{9, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_14:
         name: 'Dark Souls'
         publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
         price: <numberBetween(35, 40)>
         genres: '@genre_{9, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_15:
         name: "Assassin's Creed"
         publishedAt: <dateTimeBetween('2009-01-01', '2009-12-31')>
         price: <numberBetween(35, 40)>
         genres: '@genre_{9, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_16:
         name: "Cyberpunk 2077"
         publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
         price: <numberBetween(45, 50)>
         genres: '@genre_{2, 9, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_17:
         name: "Borderlands 2"
         publishedAt: <dateTimeBetween('2012-01-01', '2012-12-31')>
         price: <numberBetween(45, 50)>
         genres: '@genre_{9, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_18:
         name: "Final Fantasy VII"
         publishedAt: <dateTimeBetween('1997-01-01', '1997-12-31')>
         price: <numberBetween(10, 15)>
         genres: '@genre_{9, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_19:
         name: "SimCity 2000"
         publishedAt: <dateTimeBetween('1993-01-01', '1993-12-31')>
         price: <numberBetween(0, 5)>
         genres: ['@genre_0']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_20:
         name: "Age of Empire II"
         publishedAt: <dateTimeBetween('1993-01-01', '1993-12-31')>
         price: <numberBetween(10, 15)>
         genres: ['@genre_0']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_21:
         name: "Monster Hunter : World"
         publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
         price: <numberBetween(30, 35)>
         genres: '@genre_{2, 4}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_22:
         name: "Diablo III"
         publishedAt: <dateTimeBetween('2012-01-01', '2012-12-31')>
         price: <numberBetween(35, 40)>
         genres: ['@genre_10']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_23:
         name: "Path of Exile"
         publishedAt: <dateTimeBetween('2013-01-01', '2013-12-31')>
         price: <numberBetween(15, 20)>
         genres: ['@genre_10']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_24:
         name: "Magic : Arena"
         publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
         price: <numberBetween(5, 10)>
         genres: [ '@genre_11' ]
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_25:
         name: "Hearthstone"
         publishedAt: <dateTimeBetween('2014-01-01', '2014-12-31')>
         price: <numberBetween(10, 15)>
         genres: [ '@genre_11' ]
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_26:
         name: "Heroes of the Storm"
         publishedAt: <dateTimeBetween('2015-01-01', '2015-12-31')>
         price: <numberBetween(10, 15)>
         genres: [ '@genre_5' ]
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_27:
         name: "Kingdom Come Delivrance"
         publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
         price: <numberBetween(30, 35)>
         genres: '@genre_{4, 6, 8, 9}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_28:
         name: "Red Dead Redemption 2"
         publishedAt: <dateTimeBetween('2010-01-01', '2010-12-31')>
         price: <numberBetween(40, 50)>
         genres: '@genre_{4, 8, 9}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_29:
         name: "Destiny 2"
         publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
         price: <numberBetween(35, 45)>
         genres: '@genre_{2, 3, 4, 5}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_30:
         name: "Valorant"
         publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
         price: <numberBetween(10, 15)>
         genres: '@genre_{2, 3}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_31:
         name: "Among Us"
         publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
         price: <numberBetween(0, 5)>
         genres: ['@genre_3']
-        languages: ['@language_1']
+        countries: ['@country_1']
         description : '<paragraph(8)>'
     games_32:
         name: "Doom Eternal"
         publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
         price: <numberBetween(50, 60)>
         genres: '@genre_{2, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_33:
         name: "Star Wars Battlefront II"
         publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
         price: <numberBetween(35, 40)>
         genres: '@genre_{2, 8, 9}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_34:
         name: "ArmA III"
         publishedAt: <dateTimeBetween('2013-01-01', '2013-12-31')>
         price: <numberBetween(7, 28)>
         genres: '@genre_{0, 1, 2, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_35:
         name: "Total War : Warhammer II"
         publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
         price: <numberBetween(50, 60)>
         genres: '@genre_{0, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_36:
         name: "ARK : Survival Evolved"
         publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
         price: <numberBetween(50, 60)>
         genres: '@genre_{3, 4, 8, 9}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_37:
         name: "Dead by Daylight"
         publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
         price: <numberBetween(25, 30)>
         genres: ['@genre_8']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_38:
         name: "Fallout"
         publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
         price: <numberBetween(30, 40)>
         genres: [ '@genre_4' ]
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_39:
         name: "The Binding of Isaac : Rebirth"
         publishedAt: <dateTimeBetween('2014-01-01', '2014-12-31')>
         price: <numberBetween(10, 15)>
         genres: [ '@genre_8' ]
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_40:
         name: "Star Wars Jedi : Fallen Order"
         publishedAt: <dateTimeBetween('2019-01-01', '2019-12-31')>
         price: <numberBetween(35, 40)>
         genres: '@genre_{8, 9}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_41:
         name: "Left 4 Dead 2"
         publishedAt: <dateTimeBetween('2009-01-01', '2009-12-31')>
         price: <numberBetween(5, 10)>
         genres: '@genre_{2, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_42:
         name: "Battlefield V"
         publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
         price: <numberBetween(50, 60)>
         genres: '@genre_{2, 8}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_43:
         name: "Age of Mythology"
         publishedAt: <dateTimeBetween('2014-01-01', '2014-12-31')>
         price: <numberBetween(25, 30)>
         genres: '@genre_{0, 1}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_44:
         name: "The Sims 3"
         publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
         price: <numberBetween(15, 20)>
         genres: ['@genre_1']
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
     games_45:
         name: "Far Cry 5"
         publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
         price: <numberBetween(55, 60)>
         genres: '@genre_{8, 9}'
-        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+        countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
         description : '<paragraph(8)>'
 
-App\Entity\Comments:
+App\Entity\Comment:
     comments_{0..400}:
         content: <paragraph(4)>
         createAt: <dateTimeBetween('2015-01-01', '2021-02-23')>
@@ -410,7 +410,7 @@ App\Entity\Comments:
         upvotes: <numberBetween(0, 100)>
         downvotes: <numberBetween(0, 20)>
 
-App\Entity\Libraries:
+App\Entity\Library:
     librarie_{0..9999}:
         installed: <numberBetween(0, 1)>
         gameTime: <numberBetween(8000, 4000000)>

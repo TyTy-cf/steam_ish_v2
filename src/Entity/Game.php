@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GameRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,7 +33,7 @@ class Game implements  SlugInterface
 
     #[ORM\Column(type: 'datetime')]
     #[Groups(['Game'])]
-    private float $publishedAt;
+    private DateTime $publishedAt;
 
     #[ORM\Column(type: 'text')]
     #[Groups(['Game'])]
@@ -62,9 +63,9 @@ class Game implements  SlugInterface
     #[Groups(['Game'])]
     private Collection $comments;
 
-    #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'games')]
-    #[Groups(['Game'])]
-    private Publisher $publisher;
+//    #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'games')]
+//    #[Groups(['Game'])]
+//    private Publisher $publisher;
 
     public function __construct()
     {
@@ -146,18 +147,18 @@ class Game implements  SlugInterface
         return $this->countries;
     }
 
-    public function addLanguage(Country $language): self
+    public function addCountries(Country $country): self
     {
-        if (!$this->countries->contains($language)) {
-            $this->countries[] = $language;
+        if (!$this->countries->contains($country)) {
+            $this->countries[] = $country;
         }
 
         return $this;
     }
 
-    public function removeLanguage(Country $language): self
+    public function removeCountries(Country $country): self
     {
-        $this->countries->removeElement($language);
+        $this->countries->removeElement($country);
 
         return $this;
     }
@@ -223,18 +224,18 @@ class Game implements  SlugInterface
     }
 
     /**
-     * @return float
+     * @return DateTime
      */
-    public function getPublishedAt(): float
+    public function getPublishedAt(): DateTime
     {
         return $this->publishedAt;
     }
 
     /**
-     * @param float $publishedAt
+     * @param DateTime $publishedAt
      * @return Game
      */
-    public function setPublishedAt(float $publishedAt): Game
+    public function setPublishedAt(DateTime $publishedAt): Game
     {
         $this->publishedAt = $publishedAt;
         return $this;

@@ -114,7 +114,7 @@ class Country implements SlugInterface
     {
         if (!$this->games->contains($game)) {
             $this->games[] = $game;
-            $game->addLanguage($this);
+            $game->addCountries($this);
         }
 
         return $this;
@@ -123,7 +123,7 @@ class Country implements SlugInterface
     public function removeGame(Game $game): self
     {
         if ($this->games->removeElement($game)) {
-            $game->removeLanguage($this);
+            $game->removeCountries($this);
         }
 
         return $this;

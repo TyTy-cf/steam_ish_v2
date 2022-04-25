@@ -14,7 +14,7 @@
         "doctrine/orm": "^2.10",
         "hautelook/alice-bundle": "^2.8",
         "drosalys-web/form-bundle": "^1.1",
-        "drosalys-web/object-extensions": "^1.9",
+        "drosalys-web/object-extensions": "^1.9.1",
         "drosalys/api-bundle": "^0.8.1",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
         "phpdocumentor/reflection-docblock": "^5.3",
