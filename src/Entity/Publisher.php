@@ -24,7 +24,7 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Publisher'])]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '180')]
     #[Groups(['Publisher'])]
@@ -74,6 +74,22 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
     public function setWebsite(string $website): void
     {
         $this->website = $website;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     public function getCountry(): Country

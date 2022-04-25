@@ -17,7 +17,7 @@ class Library implements CreatedTimestampInterface
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Library'])]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     #[Groups(['Library'])]
@@ -29,11 +29,11 @@ class Library implements CreatedTimestampInterface
 
     #[ORM\Column(type: 'datetime')]
     #[Groups(['Game'])]
-    private float $lastUsedAt;
+    private DateTime $lastUsedAt;
 
     #[ORM\Column(type: 'datetime')]
     #[Groups(['Account'])]
-    protected DateTime $createdAt;
+    protected ?DateTime $createdAt;
 
     /**
      * Dans une relation (ManyToOne OU ManyToMany) s'il n'y a pas d'inversedBy, alors :
@@ -60,7 +60,7 @@ class Library implements CreatedTimestampInterface
     }
 
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -114,18 +114,18 @@ class Library implements CreatedTimestampInterface
     }
 
     /**
-     * @return float
+     * @return DateTime
      */
-    public function getLastUsedAt(): float
+    public function getLastUsedAt(): DateTime
     {
         return $this->lastUsedAt;
     }
 
     /**
-     * @param float $lastUsedAt
+     * @param DateTime $lastUsedAt
      * @return Library
      */
-    public function setLastUsedAt(float $lastUsedAt): Library
+    public function setLastUsedAt(DateTime $lastUsedAt): Library
     {
         $this->lastUsedAt = $lastUsedAt;
         return $this;

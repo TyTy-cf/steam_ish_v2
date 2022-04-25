@@ -21,7 +21,7 @@ class Game implements  SlugInterface
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Game'])]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['Game'])]
@@ -63,9 +63,10 @@ class Game implements  SlugInterface
     #[Groups(['Game'])]
     private Collection $comments;
 
-//    #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'games')]
-//    #[Groups(['Game'])]
-//    private Publisher $publisher;
+    #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'games')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Groups(['Game'])]
+    private ?Publisher $publisher;
 
     public function __construct()
     {
@@ -147,7 +148,7 @@ class Game implements  SlugInterface
         return $this->countries;
     }
 
-    public function addCountries(Country $country): self
+    public function addCountry(Country $country): self
     {
         if (!$this->countries->contains($country)) {
             $this->countries[] = $country;
@@ -156,7 +157,7 @@ class Game implements  SlugInterface
         return $this;
     }
 
-    public function removeCountries(Country $country): self
+    public function removeCountry(Country $country): self
     {
         $this->countries->removeElement($country);
 
@@ -211,12 +212,12 @@ class Game implements  SlugInterface
         return $this;
     }
 
-    public function getPublisher(): Publisher
+    public function getPublisher(): ?Publisher
     {
         return $this->publisher;
     }
 
-    public function setPublisher(Publisher $publisher): self
+    public function setPublisher(?Publisher $publisher): self
     {
         $this->publisher = $publisher;
 

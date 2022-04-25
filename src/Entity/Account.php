@@ -24,9 +24,9 @@ class Account implements SlugInterface, CreatedTimestampInterface
     use CreatedTimestampMethodsTrait;
     use SlugMethodsTrait;
 
-    #[ORM\Id, ORM\GeneratedValue(strategy: 'CUSTOM'), ORM\CustomIdGenerator(class: UuidGenerator::class), ORM\Column(type: 'string', length: 36)]
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Account'])]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Groups(['Account'])]
@@ -58,7 +58,7 @@ class Account implements SlugInterface, CreatedTimestampInterface
 
     #[ORM\Column(type: 'datetime')]
     #[Groups(['Account'])]
-    protected DateTime $createdAt;
+    protected ?DateTime $createdAt;
 
     public function __construct()
     {

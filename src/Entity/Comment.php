@@ -13,11 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Comment implements CreatedTimestampInterface
 {
 
-    use CreatedTimestampMethodsTrait;
-
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Comment'])]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'text')]
     #[Groups(['Comment'])]
@@ -33,7 +31,7 @@ class Comment implements CreatedTimestampInterface
 
     #[ORM\Column(type: 'datetime')]
     #[Groups(['Account'])]
-    protected DateTime $createdAt;
+    protected ?DateTime $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -45,6 +43,8 @@ class Comment implements CreatedTimestampInterface
     #[Groups(['Comment'])]
     private Game $game;
 
+    use CreatedTimestampMethodsTrait;
+
     public function __construct()
     {
         $this->downVotes = 0;
@@ -54,18 +54,6 @@ class Comment implements CreatedTimestampInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCreatedAt(): DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTime|null $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     public function getContent(): string

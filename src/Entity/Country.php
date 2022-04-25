@@ -20,7 +20,7 @@ class Country implements SlugInterface
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Country'])]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
     #[Groups(['Country'])]
@@ -79,7 +79,7 @@ class Country implements SlugInterface
         return $this->urlFlag;
     }
 
-    public function setUrlFlag(string $urlFlag): self
+    public function setUrlFlag(?string $urlFlag): self
     {
         $this->urlFlag = $urlFlag;
 
@@ -114,7 +114,7 @@ class Country implements SlugInterface
     {
         if (!$this->games->contains($game)) {
             $this->games[] = $game;
-            $game->addCountries($this);
+            $game->addCountry($this);
         }
 
         return $this;
@@ -123,7 +123,7 @@ class Country implements SlugInterface
     public function removeGame(Game $game): self
     {
         if ($this->games->removeElement($game)) {
-            $game->removeCountries($this);
+            $game->removeCountry($this);
         }
 
         return $this;

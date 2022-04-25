@@ -20,7 +20,7 @@ class Genre implements SlugInterface
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     #[Groups(['Genre'])]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
     #[Groups(['Country'])]
