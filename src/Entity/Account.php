@@ -29,17 +29,17 @@ class Account implements SlugInterface, CreatedTimestampInterface
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['AccountList', 'Account'])]
+    #[Groups(['AccountList', 'Account', 'AccountPost'])]
     #[Assert\NotBlank, Assert\Length(max: 180)]
     private string $name;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['AccountList', 'Account'])]
+    #[Groups(['AccountList', 'Account', 'AccountPost'])]
     #[Assert\NotBlank, Assert\Email(message: "account.constraints.email"), Assert\Length(max: 180)]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
-    #[Groups(['AccountList', 'Account', 'Game'])]
+    #[Groups(['AccountList', 'Account', 'Game', 'AccountPost', 'AccountPut'])]
     private ?string $nickname;
 
     #[ORM\Column(type: 'float')]
@@ -63,7 +63,7 @@ class Account implements SlugInterface, CreatedTimestampInterface
     protected ?DateTime $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
-    #[Groups(['AccountList', 'Account'])]
+    #[Groups(['AccountList', 'Account', 'AccountPut'])]
     private ?Country $country;
 
     public function __construct()
@@ -177,6 +177,16 @@ class Account implements SlugInterface, CreatedTimestampInterface
     #[Groups(['AccountList'])]
     public function getLibrariesCount(): int {
         return count($this->libraries);
+    }
+
+    #[Groups(['Account'])]
+    public function getTotalPlayedTime(): int {
+        $total = 0;
+        foreach ($this->libraries as $library) {
+            /** @var Library $library */
+            $total += $library->getGameTime();
+        }
+        return $total;
     }
 
     public static function getSlugFields(): array
