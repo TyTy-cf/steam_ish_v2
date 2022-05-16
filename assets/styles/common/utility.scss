@@ -1,7 +1,9 @@
 
 .col-20 {
-  flex: 0 0 auto;
-  width: 20%;
+  @media (min-width: 992px) {
+    flex: 0 0 auto;
+    width: 20%;
+  }
 }
 
 .container-image {
