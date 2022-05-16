@@ -31,4 +31,14 @@ class PublisherRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findOneBySlug(string $slug): ?Publisher
+    {
+        return $this->createQueryBuilder('publisher')
+            ->where('publisher.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

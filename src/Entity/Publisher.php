@@ -43,11 +43,11 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
     private Collection $games;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account', 'Game'])]
+    #[Groups(['Account', 'Game', 'Publisher'])]
     private string $slug = '';
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(['Account'])]
+    #[Groups(['Account', 'Publisher'])]
     protected DateTime $createdAt;
 
     public function __construct()

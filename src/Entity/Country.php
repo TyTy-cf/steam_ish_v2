@@ -19,27 +19,27 @@ class Country implements SlugInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Country', 'AccountList', 'Account', 'Game'])]
+    #[Groups(['Country', 'AccountList', 'Account', 'Game', 'Publisher'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['Country', 'AccountList', 'Account', 'Game'])]
+    #[Groups(['Country', 'AccountList', 'Account', 'Game', 'Publisher'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['Country', 'AccountList', 'Account', 'Game'])]
+    #[Groups(['Country', 'AccountList', 'Account', 'Game', 'Publisher'])]
     private string $nationality;
 
     #[ORM\Column(type: 'string', length: '255', nullable: true)]
-    #[Groups(['Country', 'AccountList', 'Account', 'Game'])]
+    #[Groups(['Country', 'AccountList', 'Account', 'Game', 'Publisher'])]
     private ?string $urlFlag;
 
     #[ORM\Column(type: 'string', length: '2')]
-    #[Groups(['Country', 'Account', 'Game'])]
+    #[Groups(['Country', 'Account', 'Game', 'Publisher'])]
     private string $code;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account', 'AccountList', 'Game'])]
+    #[Groups(['Account', 'AccountList', 'Game', 'Publisher'])]
     private string $slug = '';
 
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'countries')]
