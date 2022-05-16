@@ -23,11 +23,11 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Publisher'])]
+    #[Groups(['Publisher', 'Game'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '180')]
-    #[Groups(['Publisher'])]
+    #[Groups(['Publisher', 'Game'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: '180')]
@@ -43,7 +43,7 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
     private Collection $games;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account'])]
+    #[Groups(['Account', 'Game'])]
     private string $slug = '';
 
     #[ORM\Column(type: 'datetime')]

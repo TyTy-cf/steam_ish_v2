@@ -19,15 +19,15 @@ class Genre implements SlugInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Genre'])]
+    #[Groups(['Genre', 'Game'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['Country'])]
+    #[Groups(['Country', 'Game', 'Genre'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account'])]
+    #[Groups(['Account', 'Game', 'Genre'])]
     private string $slug = '';
 
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'genres')]

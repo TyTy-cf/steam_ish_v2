@@ -20,35 +20,35 @@ class Game implements  SlugInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Game'])]
+    #[Groups(['GameList', 'Game'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['Game', 'Account'])]
+    #[Groups(['GameList', 'Account', 'Game'])]
     private ?string $name;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['Game'])]
+    #[Groups(['GameList', 'Game'])]
     private float $price;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(['Game'])]
+    #[Groups(['GameList', 'Game'])]
     private DateTime $publishedAt;
 
     #[ORM\Column(type: 'text')]
-    #[Groups(['Game'])]
+    #[Groups(['GameList', 'Game'])]
     private string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['Game'])]
+    #[Groups(['GameList', 'Game'])]
     private ?string $thumbnailCover;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['Game'])]
+    #[Groups(['GameList', 'Game'])]
     private ?string $thumbnailLogo;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account', 'Account'])]
+    #[Groups(['GameList', 'Account', 'Game'])]
     private string $slug = '';
 
     #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'games')]
