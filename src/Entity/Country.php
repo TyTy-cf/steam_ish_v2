@@ -19,23 +19,23 @@ class Country implements SlugInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Country', 'AccountList'])]
+    #[Groups(['Country', 'AccountList', 'Account'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['Country', 'AccountList'])]
+    #[Groups(['Country', 'AccountList', 'Account'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['Country', 'AccountList'])]
+    #[Groups(['Country', 'AccountList', 'Account'])]
     private string $nationality;
 
     #[ORM\Column(type: 'string', length: '255', nullable: true)]
-    #[Groups(['Country', 'AccountList'])]
+    #[Groups(['Country', 'AccountList', 'Account'])]
     private ?string $urlFlag;
 
     #[ORM\Column(type: 'string', length: '2')]
-    #[Groups(['Country'])]
+    #[Groups(['Country', 'Account'])]
     private string $code;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]

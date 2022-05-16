@@ -24,7 +24,7 @@ class Game implements  SlugInterface
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['Game'])]
+    #[Groups(['Game', 'Account'])]
     private ?string $name;
 
     #[ORM\Column(type: 'float')]
@@ -48,7 +48,7 @@ class Game implements  SlugInterface
     private ?string $thumbnailLogo;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account'])]
+    #[Groups(['Account', 'Account'])]
     private string $slug = '';
 
     #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'games')]

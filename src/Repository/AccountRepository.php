@@ -31,6 +31,28 @@ class AccountRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string $slug
+     * @return null|Account
+     * @throws NonUniqueResultException
+     */
+    public function findOneBySlug(string $slug): ?Account
+    {
+        return $this->createQueryBuilder('account')
+            ->select('account', 'libraries', 'game', 'country', 'comments')
+            ->leftJoin('account.libraries', 'libraries')
+            ->leftJoin('libraries.game', 'game')
+            ->leftJoin('account.country', 'country')
+            ->leftJoin('account.comments', 'comments')
+            ->where('account.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('libraries.installed', 'DESC')
+            ->addOrderBy('game.name', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
      * Requête optimiser pour récupérer tous les account avec leurs bibliothèques
      *
      * @param string $order

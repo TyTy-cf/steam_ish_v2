@@ -25,43 +25,45 @@ class Account implements SlugInterface, CreatedTimestampInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     #[Assert\NotBlank, Assert\Length(max: 180)]
     private string $name;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     #[Assert\NotBlank, Assert\Email(message: "account.constraints.email"), Assert\Length(max: 180)]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     private ?string $nickname;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     private float $wallet;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Library::class)]
+    #[Groups(['Account'])]
     private Collection $libraries;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
+    #[Groups(['Account'])]
     private Collection $comments;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     private string $slug = '';
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     protected ?DateTime $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
-    #[Groups(['AccountList'])]
+    #[Groups(['AccountList', 'Account'])]
     private ?Country $country;
 
     public function __construct()

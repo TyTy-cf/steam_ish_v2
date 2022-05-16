@@ -14,23 +14,23 @@ class Comment implements CreatedTimestampInterface
 {
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Comment'])]
+    #[Groups(['Comment', 'Account'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'text')]
-    #[Groups(['Comment'])]
+    #[Groups(['Comment', 'Account'])]
     private string $content;
 
     #[ORM\Column(type: 'integer')]
-    #[Groups(['Comment'])]
+    #[Groups(['Comment', 'Account'])]
     private int $upVotes;
 
     #[ORM\Column(type: 'integer')]
-    #[Groups(['Comment'])]
+    #[Groups(['Comment', 'Account'])]
     private int $downVotes;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(['Account'])]
+    #[Groups(['Account', 'Account'])]
     protected ?DateTime $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'comments')]
@@ -40,7 +40,7 @@ class Comment implements CreatedTimestampInterface
 
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['Comment'])]
+    #[Groups(['Comment', 'Account'])]
     private Game $game;
 
     use CreatedTimestampMethodsTrait;
