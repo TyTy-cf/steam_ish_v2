@@ -39,7 +39,7 @@ class Account implements SlugInterface, CreatedTimestampInterface
     private string $email;
 
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
-    #[Groups(['AccountList', 'Account'])]
+    #[Groups(['AccountList', 'Account', 'Game'])]
     private ?string $nickname;
 
     #[ORM\Column(type: 'float')]
@@ -55,7 +55,7 @@ class Account implements SlugInterface, CreatedTimestampInterface
     private Collection $comments;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['AccountList', 'Account'])]
+    #[Groups(['AccountList', 'Account', 'Game'])]
     private string $slug = '';
 
     #[ORM\Column(type: 'datetime')]
