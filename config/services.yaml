@@ -21,6 +21,10 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: [ 'controller.service_arguments' ]
+
     App\EventListener\CountryPersistSubscriber:
         tags:
             - { name: doctrine.event_listener, event: prePersist }

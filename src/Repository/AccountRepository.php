@@ -24,6 +24,8 @@ class AccountRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->createQueryBuilder('a')
+            ->select('a', 'c')
+            ->leftJoin('a.country', 'c')
             ->orderBy('a.name')
         ;
     }

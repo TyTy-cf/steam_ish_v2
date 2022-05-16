@@ -11,18 +11,22 @@ use Drosalys\Bundle\ApiBundle\Serializer\Attributes\Serializable;
 
 class CollectionAction
 {
+    /**
+     * CollectionAction constructor.
+     * @param AccountRepository $accountRepository
+     */
+    public function __construct(private AccountRepository $accountRepository) { }
 
     /**
      * Get User account list.
-     * @param AccountRepository $accountRepository
      * @return QueryBuilder
      */
     #[Get('/api/account')]
-    #[Serializable(groups: 'Account')]
+    #[Serializable(groups: 'AccountList')]
     #[Paginable(Account::class)]
-    public function __invoke(AccountRepository $accountRepository): QueryBuilder
+    public function __invoke(): QueryBuilder
     {
-        return $accountRepository->queryAll();
+        return $this->accountRepository->queryAll();
     }
 
 }

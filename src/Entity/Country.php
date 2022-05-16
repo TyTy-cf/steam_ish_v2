@@ -19,19 +19,19 @@ class Country implements SlugInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Country'])]
+    #[Groups(['Country', 'AccountList'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['Country'])]
+    #[Groups(['Country', 'AccountList'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['Country'])]
+    #[Groups(['Country', 'AccountList'])]
     private string $nationality;
 
     #[ORM\Column(type: 'string', length: '255', nullable: true)]
-    #[Groups(['Country'])]
+    #[Groups(['Country', 'AccountList'])]
     private ?string $urlFlag;
 
     #[ORM\Column(type: 'string', length: '2')]
@@ -39,7 +39,7 @@ class Country implements SlugInterface
     private string $code;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account'])]
+    #[Groups(['Account', 'AccountList'])]
     private string $slug = '';
 
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'countries')]

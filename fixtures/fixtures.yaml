@@ -1,38 +1,4 @@
 
-App\Entity\Account:
-    account_{0..1499}:
-        name (unique): <userName()>
-        email (unique): <email()>
-        nickname: <userName()>
-        wallet: <numberBetween(0, 200)>
-        createdAt: <dateTimeBetween('2015-01-01', '2022-04-25')>
-
-App\Entity\Genre:
-    genre_0:
-        name: "Stratégie"
-    genre_1:
-        name: "Simulation"
-    genre_2:
-        name: "FPS"
-    genre_3:
-        name: "MMO"
-    genre_4:
-        name: "RPG"
-    genre_5:
-        name: "MOBA"
-    genre_6:
-        name: "Monde ouvert"
-    genre_7:
-        name: "Battle Royale"
-    genre_8:
-        name: "Action"
-    genre_9:
-        name: "Aventure"
-    genre_10:
-        name: "Hack 'n' Slash"
-    genre_11:
-        name: "Cartes"
-
 App\Entity\Country:
     country_0:
         name: 'France'
@@ -82,6 +48,41 @@ App\Entity\Country:
         name: 'Nouvelle Zélande'
         nationality: 'Néo zélandais'
         code: 'nz'
+
+App\Entity\Account:
+    account_{0..1499}:
+        name (unique): <userName()>
+        email (unique): <email()>
+        nickname: <userName()>
+        wallet: <numberBetween(0, 200)>
+        createdAt: <dateTimeBetween('2015-01-01', '2022-04-25')>
+        country: '@country_<numberBetween(0, 11)>'
+
+App\Entity\Genre:
+    genre_0:
+        name: "Stratégie"
+    genre_1:
+        name: "Simulation"
+    genre_2:
+        name: "FPS"
+    genre_3:
+        name: "MMO"
+    genre_4:
+        name: "RPG"
+    genre_5:
+        name: "MOBA"
+    genre_6:
+        name: "Monde ouvert"
+    genre_7:
+        name: "Battle Royale"
+    genre_8:
+        name: "Action"
+    genre_9:
+        name: "Aventure"
+    genre_10:
+        name: "Hack 'n' Slash"
+    genre_11:
+        name: "Cartes"
 
 App\Entity\Publisher:
     publisher_0:

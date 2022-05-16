@@ -25,41 +25,44 @@ class Account implements SlugInterface, CreatedTimestampInterface
     use SlugMethodsTrait;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['Account'])]
+    #[Groups(['AccountList'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['Account'])]
+    #[Groups(['AccountList'])]
     #[Assert\NotBlank, Assert\Length(max: 180)]
     private string $name;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['Account'])]
+    #[Groups(['AccountList'])]
     #[Assert\NotBlank, Assert\Email(message: "account.constraints.email"), Assert\Length(max: 180)]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
-    #[Groups(['Account'])]
+    #[Groups(['AccountList'])]
     private ?string $nickname;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['Account'])]
+    #[Groups(['AccountList'])]
     private float $wallet;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Library::class)]
-    #[Groups(['Account'])]
     private Collection $libraries;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
     private Collection $comments;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account'])]
+    #[Groups(['AccountList'])]
     private string $slug = '';
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(['Account'])]
+    #[Groups(['AccountList'])]
     protected ?DateTime $createdAt;
+
+    #[ORM\ManyToOne(targetEntity: Country::class)]
+    #[Groups(['AccountList'])]
+    private ?Country $country;
 
     public function __construct()
     {
@@ -169,11 +172,28 @@ class Account implements SlugInterface, CreatedTimestampInterface
         return $this;
     }
 
+    #[Groups(['AccountList'])]
+    public function getLibrariesCount(): int {
+        return count($this->libraries);
+    }
+
     public static function getSlugFields(): array
     {
         return [
             'name',
             'id'
         ];
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
+
+        return $this;
     }
 }
