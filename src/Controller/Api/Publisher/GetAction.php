@@ -4,11 +4,8 @@
 namespace App\Controller\Api\Publisher;
 
 
-use App\Entity\Game;
 use App\Entity\Publisher;
-use App\Repository\GameRepository;
 use App\Repository\PublisherRepository;
-use Doctrine\ORM\NonUniqueResultException;
 use Drosalys\Bundle\ApiBundle\Routing\Attributes\Get;
 use Drosalys\Bundle\ApiBundle\Serializer\Attributes\Serializable;
 
@@ -27,7 +24,7 @@ class GetAction
     public function __construct(private PublisherRepository $publisherRepository) { }
 
     /**
-     * Get Game by slug
+     * Get Publisher by slug
      * @param string $slug
      * @return Publisher|null
      */

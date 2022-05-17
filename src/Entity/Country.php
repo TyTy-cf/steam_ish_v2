@@ -39,7 +39,7 @@ class Country implements SlugInterface
     private string $code;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['Account', 'AccountList', 'Game', 'Publisher', 'AccountPut'])]
+    #[Groups(['Account', 'AccountList', 'Game', 'Publisher', 'AccountPut', 'PublisherPost'])]
     private string $slug = '';
 
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'countries')]

@@ -27,15 +27,15 @@ class Publisher implements SlugInterface, CreatedTimestampInterface
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '180')]
-    #[Groups(['Publisher', 'Game'])]
+    #[Groups(['Publisher', 'Game', 'PublisherPost'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: '180')]
-    #[Groups(['Publisher'])]
+    #[Groups(['Publisher', 'PublisherPost'])]
     private string $website;
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
-    #[Groups(['Publisher'])]
+    #[Groups(['Publisher', 'PublisherPost'])]
     private Country $country;
 
     #[ORM\OneToMany(mappedBy: 'publisher', targetEntity: Game::class)]
