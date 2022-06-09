@@ -36,7 +36,7 @@ class Country implements SlugInterface
 
     #[ORM\Column(type: 'string', length: '2')]
     #[Groups(['Country', 'Account', 'Game', 'Publisher'])]
-    private string $code;
+    private string $code = '';
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Groups(['Account', 'AccountList', 'Game', 'Publisher', 'AccountPut', 'PublisherPost'])]

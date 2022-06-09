@@ -7,7 +7,7 @@ App\Entity\Country:
     country_1:
         name: 'Royaume-Uni'
         nationality: 'Anglais'
-        code: 'uk'
+        code: 'gb'
     country_2:
         name: 'Russie'
         nationality: 'Russe'

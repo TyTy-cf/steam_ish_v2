@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Repository\GameRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomeControllerTest extends WebTestCase
@@ -15,18 +16,29 @@ class HomeControllerTest extends WebTestCase
     }
 
 
-
     public function testHomePageTitle()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $crawlerGlobal = $client->request('GET', '/');
 
-        $crawler = $crawler->filter('h2');
+        $crawler = $crawlerGlobal->filter('h2');
 
         $this->assertCount(4, $crawler, "One title is missing");
 
-        $this->assertStringContainsString($crawler->eq(0)->text(), 'Tous les jeux','Title not found');
+        $this->assertStringContainsString( 'Tous les jeux', $crawlerGlobal->text(), 'Title not found');
+        $this->assertStringContainsString( 'Les dernières sorties', $crawlerGlobal->text(), 'Title not found');
     }
 
+    public function testAllGames()
+    {
+        $client = static::createClient();
+        $gameRepository = $this->getContainer()->get('doctrine')->getRepository('App:Game');
+
+        $games = $gameRepository->findAll();
+        foreach ($games as $game) {
+            $client->request('GET', '/game/' . $game->getSlug());
+            $this->assertResponseStatusCodeSame(200, 'Error getting the games page');
+        }
+    }
 
 }
